@@ -1,0 +1,1392 @@
+<!DOCTYPE html>
+<html lang="en" style="scroll-behavior: smooth;">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>MC Addons — Download & Import Bedrock Addons</title>
+    <meta name="description" content="Discover and install texture packs, behavior packs, and custom worlds directly into Minecraft Bedrock with instant installation.">
+
+    <!-- Google Fonts: Sora, Geist, Instrument Sans, Material Symbols -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Geist:wght@400;500;600&family=Instrument+Sans:wght@400;500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS v3 -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+    <!-- Tailwind Configuration -->
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "var(--text-primary)",
+                        "surface": "var(--surface-bg)",
+                        "on-surface-variant": "var(--text-muted)",
+                        "accent": {
+                            emerald: '#10b981',
+                            cyan: '#06b6d4',
+                            light: 'var(--accent-light)'
+                        }
+                    },
+                    fontFamily: {
+                        sora: ['Sora', 'sans-serif'],
+                        'label-sm': ["Geist"],
+                        'display-lg-mobile': ["Sora"],
+                        'body-md': ["Geist"],
+                        'label-md': ["Geist"],
+                        'headline-xl': ["Sora"],
+                        'display-lg': ["Sora"],
+                        'body-lg': ["Geist"],
+                        'headline-lg': ["Sora"],
+                        instrument: ['"Instrument Sans"', 'sans-serif'],
+                        geist: ["Geist", "sans-serif"]
+                    },
+                    fontSize: {
+                        "display-lg-mobile": ["40px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "display-lg": ["72px", { "lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "600" }],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Custom Glassmorphism, Dual Themes & Animations -->
+    <style>
+        :root {
+            /* Standard Light Mode Colors (Adapted for Emerald/Cyan MC Theme) */
+            --bg-gradient: radial-gradient(circle at 50% 0%, #f0fdf4 0%, #f8fafc 40%, #ffffff 100%);
+            --text-primary: #09090b;
+            --text-muted: #475569;
+            --surface-bg: rgba(255, 255, 255, 0.75);
+            --border-color: rgba(226, 232, 240, 0.85);
+            --accent-light: #d1fae5;
+            --card-hover: rgba(241, 245, 249, 0.8);
+            --dialog-bg: rgba(255, 255, 255, 0.95);
+            --dialog-btn: rgba(241, 245, 249, 0.9);
+            --mockup-border: #e2e8f0;
+            --nav-bg: rgba(255, 255, 255, 0.9);
+            --tag-bg: #f1f5f9;
+            --tag-text: #334155;
+            --tag-border: #cbd5e1;
+            
+            /* Blob Colors - Light */
+            --blob-color-1: rgba(16, 185, 129, 0.15); /* Emerald */
+            --blob-color-2: rgba(6, 182, 212, 0.12); /* Cyan */
+            --blob-color-3: rgba(20, 184, 166, 0.15); /* Teal */
+        }
+
+        html.dark {
+            /* Standard Dark Gray/Black Colors */
+            --bg-gradient: radial-gradient(circle at 50% 0%, #18181b 0%, #09090b 50%, #000000 100%);
+            --text-primary: #f8fafc;
+            --text-muted: #a1a1aa;
+            --surface-bg: rgba(255, 255, 255, 0.04);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --accent-light: rgba(255, 255, 255, 0.1);
+            --card-hover: rgba(255, 255, 255, 0.02);
+            --dialog-bg: rgba(9, 9, 11, 0.95);
+            --dialog-btn: rgba(39, 39, 42, 0.8);
+            --mockup-border: #27272a;
+            --nav-bg: rgba(9, 9, 11, 0.85);
+            --tag-bg: rgba(255, 255, 255, 0.1);
+            --tag-text: #f8fafc;
+            --tag-border: rgba(255, 255, 255, 0.2);
+
+            /* Blob Colors - Dark */
+            --blob-color-1: rgba(16, 185, 129, 0.08); /* Dimmer Emerald */
+            --blob-color-2: rgba(6, 182, 212, 0.07); /* Dimmer Cyan */
+            --blob-color-3: rgba(20, 184, 166, 0.08); /* Dimmer Teal */
+        }
+
+        html {
+            scroll-padding-top: 120px;
+        }
+
+        body {
+            background-color: transparent !important;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
+        }
+
+        /* Fixed Background Container */
+        #page-background {
+            position: fixed; 
+            top: 0; left: 0; right: 0; bottom: 0;
+            width: 100vw; height: 100vh; 
+            z-index: -1;
+            background: var(--bg-gradient);
+            transition: background 0.4s ease;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        /* ----- Floating Background Blobs ----- */
+        .bg-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            will-change: transform;
+            pointer-events: none;
+            transition: background-color 0.4s ease;
+        }
+
+        .blob-1 {
+            width: 400px; height: 400px;
+            background-color: var(--blob-color-1);
+            top: -10%; left: -10%;
+            animation: blob-float-1 25s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .blob-2 {
+            width: 500px; height: 500px;
+            background-color: var(--blob-color-2);
+            bottom: -20%; right: -10%;
+            animation: blob-float-2 22s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+            animation-delay: -5s;
+        }
+
+        .blob-3 {
+            width: 350px; height: 350px;
+            background-color: var(--blob-color-3);
+            top: 40%; left: 40%;
+            animation: blob-float-3 28s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+            animation-delay: -10s;
+        }
+
+        @keyframes blob-float-1 {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(15vw, 15vh) scale(1.1); }
+            100% { transform: translate(-5vw, 25vh) scale(0.95); }
+        }
+
+        @keyframes blob-float-2 {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-15vw, -20vh) scale(0.9); }
+            100% { transform: translate(-25vw, 5vh) scale(1.05); }
+        }
+
+        @keyframes blob-float-3 {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(10vw, -15vh) scale(1.15); }
+            100% { transform: translate(-10vw, -5vh) scale(0.9); }
+        }
+
+        /* Floating Components */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .floating-element {
+            animation: float 4s ease-in-out infinite;
+            will-change: transform; backface-visibility: hidden;
+        }
+
+        .glass-card, .glass-panel {
+            background: var(--surface-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        /* Phone Mockup Showcase & Stagger Lift */
+        .mockup-container {
+            perspective: 1200px;
+        }
+
+        .mockup-item {
+            --px: 0px;
+            --py: 0px;
+            transform: translate3d(var(--px), var(--py), 0);
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            will-change: transform;
+            backface-visibility: hidden;
+            cursor: pointer;
+        }
+
+        .mockup-item:hover {
+            transform: translate3d(var(--px), calc(var(--py) - 30px), 0) scale(1.06);
+            z-index: 50;
+        }
+
+        .phone-frame {
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
+            transition: box-shadow 0.6s cubic-bezier(0.23, 1, 0.32, 1), border-color 0.3s ease;
+        }
+        
+        html.dark .phone-frame {
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .mockup-item:hover .phone-frame {
+            box-shadow: 0 30px 60px -15px rgba(16, 185, 129, 0.35);
+        }
+        
+        html.dark .mockup-item:hover .phone-frame {
+            box-shadow: 0 30px 60px -15px rgba(255, 255, 255, 0.1);
+        }
+
+        .glow-avatar {
+            box-shadow: 0 0 30px rgba(16, 185, 129, 0.2), inset 0 0 15px rgba(16, 185, 129, 0.1);
+        }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        @keyframes revealUpAnim {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .reveal-up { opacity: 0; will-change: opacity, transform; }
+        .reveal-visible { animation: revealUpAnim 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+        /* Custom Navbar */
+        @keyframes navSlideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        #top-navbar {
+            position: fixed; top: 0; width: 100%; z-index: 100;
+            transition: padding 0.4s ease, background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        #top-navbar.animate-nav { animation: navSlideDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+        .nav-link {
+            color: var(--text-muted) !important; background-color: transparent; padding: 8px 16px; border-radius: 50px;
+            font-size: 15px; font-weight: 500; font-family: 'Instrument Sans', sans-serif;
+            transition: all 0.2s ease; display: flex; align-items: center; user-select: none;
+        }
+        .nav-link:hover { color: var(--text-primary) !important; background-color: var(--accent-light) !important; }
+        .nav-link:active { transform: scale(0.97); }
+
+        .mobile-menu-link {
+            color: var(--text-primary) !important; font-family: 'Instrument Sans', sans-serif; font-size: 18px;
+            font-weight: 500; text-decoration: none; transition: all 0.2s ease;
+            display: inline-flex; align-items: center; user-select: none;
+        }
+
+        /* Fluid FAQ Accordion Dropdown Animation */
+        details.faq-item summary::-webkit-details-marker { display: none; }
+        details.faq-item {
+            border-color: var(--border-color);
+            background-color: var(--surface-bg);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        details.faq-item summary .faq-chevron {
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        details.faq-item[open] summary .faq-chevron {
+            transform: rotate(180deg);
+        }
+        details.faq-item .faq-content {
+            overflow: hidden;
+        }
+
+        /* Modal Dialog */
+        dialog {
+            display: none; align-items: center; justify-content: center; position: fixed; inset: 0;
+            width: 100vw; height: 100vh; max-width: 100% !important; max-height: 100% !important;
+            background: transparent !important; z-index: 1000; border: none; outline: none;
+        }
+        dialog[open] { display: flex !important; }
+        dialog::backdrop { display: none !important; }
+
+        .dialog-backdrop {
+            position: absolute; inset: 0; background-color: rgba(0, 0, 0, 0);
+            backdrop-filter: blur(0px); -webkit-backdrop-filter: blur(0px);
+            transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
+            z-index: 1; pointer-events: auto;
+        }
+        dialog.is-open .dialog-backdrop {
+            background-color: rgba(0, 0, 0, 0.45); backdrop-filter: blur(8px);
+        }
+
+        .helium-dialog-container {
+            width: calc(100% - 32px); max-width: 400px; font-size: 16px;
+            background: var(--dialog-bg); backdrop-filter: blur(24px);
+            border: 1px solid var(--border-color); border-radius: 28px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            transform-origin: center; transform: scale(0.9); opacity: 0;
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+            z-index: 10; pointer-events: auto;
+        }
+        dialog.is-open .helium-dialog-container { transform: scale(1); opacity: 1; }
+
+        .helium-dialog-btn {
+            background: var(--dialog-btn); border: 1px solid var(--border-color);
+            border-radius: 16px; padding: 16px; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; gap: 6px; color: var(--text-primary);
+            font-family: 'Instrument Sans', sans-serif; text-align: center;
+            user-select: none; transition: all 0.2s ease; outline: none;
+        }
+        .helium-dialog-btn:hover { border-color: #10b981; transform: translateY(-2px); box-shadow: 0 10px 20px -5px rgba(16,185,129,0.2); }
+        .helium-dialog-btn:active { transform: scale(0.98); }
+
+        .helium-dialog-btn-close {
+            background: var(--text-primary) !important; color: var(--dialog-bg) !important; border-radius: 12px !important;
+            padding: 12px 18px !important; width: 100%; font-family: 'Instrument Sans', sans-serif;
+            font-weight: 600; font-size: 15px; cursor: pointer; transition: opacity 0.2s ease, transform 0.15s ease;
+        }
+        .helium-dialog-btn-close:hover { opacity: 0.9; }
+        .helium-dialog-btn-close:active { transform: scale(0.98) !important; }
+
+        @media screen and (max-width: 550px) {
+            dialog { align-items: flex-end !important; }
+            .helium-dialog-container {
+                width: calc(100% - 24px); max-width: 500px;
+                border-radius: 28px; margin-bottom: 20px;
+                transform: translateY(100%) !important; opacity: 0;
+                transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease !important;
+            }
+            dialog.is-open .helium-dialog-container { transform: translateY(0) !important; opacity: 1; }
+        }
+    </style>
+</head>
+
+<body class="bg-transparent text-primary font-sora selection:bg-accent-light selection:text-accent-emerald overflow-x-hidden">
+
+    <!-- Fixed Gradient Element with Blobs -->
+    <div id="page-background">
+        <div class="bg-blob blob-1"></div>
+        <div class="bg-blob blob-2"></div>
+        <div class="bg-blob blob-3"></div>
+    </div>
+
+    <!-- BEGIN: Navigation -->
+    <nav id="top-navbar" class="fixed top-0 w-full z-[100] py-5 px-6 md:px-12 flex justify-between items-center transform -translate-y-full opacity-0 animate-nav">
+        <div class="flex items-center gap-2">
+            <a href="/" class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg shadow-sm border border-slate-200 dark:border-slate-800 bg-gradient-to-br from-emerald-400 to-cyan-500 flex items-center justify-center text-white">
+                    <span class="material-symbols-outlined text-[20px]">category</span>
+                </div>
+                <span class="text-xl font-bold tracking-tight text-primary">MC Addons</span>
+            </a>
+        </div>
+
+        <div class="flex items-center gap-6">
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center gap-6 text-sm font-medium">
+                <a class="nav-link" href="#features">Features</a>
+                <a class="nav-link" href="#faq">FAQ</a>
+                <a class="nav-link" href="#community">Creators</a>
+                <a class="nav-link" href="https://github.com" target="_blank">GitHub</a>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <!-- Theme Toggler Button -->
+                <button id="theme-toggle" class="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 text-primary transition-colors flex items-center justify-center" aria-label="Toggle Theme">
+                    <span id="theme-icon" class="material-symbols-outlined text-[20px]">dark_mode</span>
+                </button>
+
+                <button class="trigger-download-modal hidden sm:inline-block bg-primary text-[var(--dialog-bg)] px-6 py-2.5 rounded-full text-sm font-bold hover:opacity-90 transition-all active:scale-95 shadow-md">
+                    Download
+                </button>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden text-primary focus:outline-none flex items-center justify-center gap-1.5 px-4 py-1.5 rounded-full bg-black/5 dark:bg-white/10 border border-slate-200 dark:border-slate-800 text-sm font-medium hover:bg-black/10 transition-colors select-none">
+                    <span>Links</span>
+                    <span class="material-symbols-outlined text-[18px] transition-transform duration-200" id="mobile-menu-chevron">expand_more</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="absolute right-6 md:right-12 top-full mt-2 z-[90] flex flex-col items-end gap-4 p-5 rounded-2xl glass-card border border-[var(--border-color)] shadow-xl transform -translate-y-4 opacity-0 transition-all duration-300 pointer-events-none md:hidden">
+            <a class="mobile-menu-link" href="#features">Features</a>
+            <a class="mobile-menu-link" href="#faq">FAQ</a>
+            <a class="mobile-menu-link" href="#community">Creators</a>
+            <a class="mobile-menu-link flex items-center gap-1" href="https://github.com" target="_blank">
+                GitHub <span class="material-symbols-outlined text-[16px] opacity-60">open_in_new</span>
+            </a>
+            <button class="trigger-download-modal flex items-center justify-center gap-2 bg-primary text-[var(--dialog-bg)] px-5 py-2.5 rounded-full text-sm font-bold shadow-md w-full">
+                <span class="material-symbols-outlined text-[18px]">download</span> Download
+            </button>
+        </div>
+    </nav>
+    <!-- END: Navigation -->
+
+    <main id="home" class="relative min-h-screen pt-32 pb-20 overflow-hidden">
+        <!-- Hero Section -->
+        <section class="container mx-auto px-6 text-center relative z-10 reveal-up">
+            <div class="w-16 h-16 rounded-2xl mx-auto mb-8 shadow-md border border-[var(--border-color)] bg-gradient-to-br from-emerald-400 to-cyan-500 flex items-center justify-center text-white">
+                <span class="material-symbols-outlined text-[36px]">view_in_ar</span>
+            </div>
+
+            <h1 class="text-4xl md:text-[54px] font-semibold mb-6 tracking-tight md:tracking-[-0.04em] text-primary font-geist leading-[1.1] max-w-[800px] mx-auto flex items-center justify-center flex-wrap">
+                Download & Import Bedrock Addons in One Tap
+            </h1>
+            <p class="text-on-surface-variant text-base md:text-lg max-w-[650px] mx-auto mb-10 leading-relaxed font-geist">
+                Discover texture packs, behavior packs, and custom worlds directly into Minecraft Bedrock with instant installation. Native Android experience.
+            </p>
+            
+            <div class="flex flex-col items-center justify-center gap-3 mb-6">
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-3 w-full sm:w-auto">
+                    <button class="trigger-download-modal flex items-center justify-center gap-2 bg-primary text-[var(--dialog-bg)] px-8 py-3.5 rounded-xl text-sm font-bold hover:scale-105 hover:opacity-90 transition-all active:scale-95 shadow-lg w-full sm:w-auto">
+                        <span class="material-symbols-outlined text-[20px]">android</span>
+                        Download APK (v0.9.0)
+                    </button>
+                    <a href="https://github.com" target="_blank" class="flex items-center justify-center gap-2 bg-black/5 dark:bg-white/10 text-primary border border-[var(--border-color)] px-8 py-3.5 rounded-xl text-sm font-bold hover:bg-black/10 dark:hover:bg-white/15 hover:scale-105 transition-all active:scale-95 shadow-sm w-full sm:w-auto">
+                        <svg viewBox="0 0 24 24" class="w-5 h-5 fill-current"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+                        View on GitHub
+                    </a>
+                </div>
+                <div class="flex items-center gap-2 text-xs font-geist text-slate-500 select-none mt-2">
+                    <span class="border border-[var(--tag-border)] text-[var(--tag-text)] bg-[var(--tag-bg)] px-2 py-0.5 rounded-[4px] text-[10px] font-bold tracking-wider">Stable</span>
+                    <span>for Android 14+</span>
+                    <span class="text-slate-400 mx-1">|</span>
+                    <a href="#beta-channel" class="hover:text-primary transition-colors flex items-center gap-1.5 text-slate-500">
+                        <span class="border border-amber-500/40 text-amber-600 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/30 px-1.5 py-0.5 rounded-[4px] text-[9px] font-bold tracking-wider uppercase">Beta</span>
+                        <span class="underline underline-offset-2">Pre-release builds</span>
+                    </a>
+                </div>
+                <div class="flex items-center gap-3 text-[12px] font-geist text-slate-400 select-none mt-1 flex-wrap justify-center">
+                    <div class="flex items-center gap-1.5">
+                        <span class="material-symbols-outlined text-[14px]">star</span>
+                        <span id="github-stars-hero">— GitHub stars</span>
+                    </div>
+                    <span class="text-slate-400">|</span>
+                    <div class="flex items-center gap-1.5">
+                        <span class="material-symbols-outlined text-[14px]">download</span>
+                        <span id="total-downloads-hero">— total downloads</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hero Mockup -->
+        <section class="relative max-w-4xl mx-auto mt-12 px-6 flex flex-col items-center justify-center reveal-up" style="transition-delay: 200ms;">
+            <div class="relative z-20 w-64 md:w-72 aspect-[9/18.5] bg-slate-900 rounded-[3rem] p-3 border-[6px] border-[var(--mockup-border)] shadow-2xl">
+                <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-slate-900 rounded-b-2xl z-30"></div>
+                <div class="w-full h-full rounded-[2.2rem] overflow-hidden bg-slate-950 relative group">
+                    <img alt="MC Addons App Preview" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://images.unsplash.com/photo-1607513364986-ce0187889e47?auto=format&fit=crop&q=80&w=600&h=1200">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-5">
+                        <span class="px-3 py-1 bg-emerald-500 text-white text-[10px] font-bold rounded-full w-max mb-2">ADDON</span>
+                        <h4 class="text-white font-bold text-lg leading-tight mb-1">Dynamic Lighting</h4>
+                        <p class="text-slate-300 text-xs mb-4">by Bedrock Devs</p>
+                        <button class="w-full bg-emerald-500 text-white font-semibold text-sm py-3 rounded-xl shadow-md">Install</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- BEGIN: Showcase / Gallery (Dynamic Phone Mockups) -->
+    <div id="screenshots" class="font-body-md bg-transparent w-full pt-28 pb-24">
+        <section class="max-w-7xl mx-auto px-6 md:px-16 text-center mb-16 reveal-up">
+            <h1 class="font-display-lg text-display-lg-mobile md:text-display-lg mb-6 tracking-tighter leading-tight text-primary">
+                Seamless <br />Addon Browsing.
+            </h1>
+            <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto mb-10">
+                Search, filter, and import in seconds. A Material 3 interface that beautifully adapts to your system theme.
+            </p>
+        </section>
+
+        <!-- Phone Mockups Showcase -->
+        <section class="relative w-full pt-12 mockup-container">
+            <div id="dynamic-mockups" class="flex justify-start md:justify-center items-center md:items-end gap-6 md:gap-12 px-6 md:px-12 overflow-x-auto no-scrollbar min-h-[550px] md:min-h-[750px] snap-x snap-mandatory pt-12 pb-16">
+                <!-- Javascript will inject mockup items here for staggered and parallax gallery animation -->
+            </div>
+        </section>
+    </div>
+    <!-- END: Showcase / Gallery -->
+
+    <!-- BEGIN: Interactive Features Carousel -->
+    <section id="features-carousel" class="w-full max-w-7xl mx-auto px-6 md:px-12 py-24 bg-transparent reveal-up">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-8 items-center">
+
+            <!-- Left: Text Content -->
+            <div class="flex flex-col justify-between order-2 lg:order-1 min-h-[350px] md:min-h-[420px]">
+                <div id="carousel-content" class="transition-all duration-500 transform min-h-[260px]">
+                    <div id="slide-tagline" class="border border-[var(--tag-border)] rounded-full px-4 py-1.5 text-[11px] uppercase tracking-[0.2em] font-bold text-[var(--tag-text)] inline-block mb-6 bg-[var(--tag-bg)]">
+                        CORE FEATURE
+                    </div>
+                    <h2 id="slide-title" class="text-4xl md:text-6xl font-bold text-primary tracking-tighter leading-[1.1] mb-6 font-geist">
+                        One-Tap Install
+                    </h2>
+                    <p id="slide-desc" class="text-on-surface-variant font-body text-base md:text-lg leading-relaxed max-w-xl mb-8">
+                        Automatically packages and launches `.mcaddon`, `.mcpack`, and `.mcworld` files straight into Minecraft. No file managers needed.
+                    </p>
+                </div>
+
+                <!-- Controls -->
+                <div class="flex flex-col gap-6 mt-4 w-full">
+                    <div class="flex gap-3 items-center">
+                        <div class="flex gap-2" id="pagination-dots">
+                            <!-- Dots injected by JS -->
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <button id="btn-prev" class="w-12 h-12 rounded-full border border-[var(--border-color)] flex items-center justify-center text-primary hover:bg-black/5 dark:hover:bg-white/10 transition-colors group">
+                            <span class="material-symbols-outlined transition-transform group-hover:-translate-x-1">arrow_back</span>
+                        </button>
+                        <button id="btn-next" class="w-12 h-12 rounded-full border border-[var(--border-color)] flex items-center justify-center text-primary hover:bg-black/5 dark:hover:bg-white/10 transition-colors group">
+                            <span class="material-symbols-outlined transition-transform group-hover:translate-x-1">arrow_forward</span>
+                        </button>
+                        <div class="ml-4 flex-1 max-w-[120px] h-1.5 bg-black/10 dark:bg-white/10 rounded-full overflow-hidden">
+                            <div id="autoplay-progress" class="h-full bg-primary w-0"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Mockup Image -->
+            <div class="flex justify-center items-center order-1 lg:order-2 w-full">
+                <div class="relative w-[240px] md:w-[300px] aspect-[9/19.5] rounded-[2.5rem] border-[6px] border-[var(--mockup-border)] bg-black overflow-hidden shadow-2xl shadow-black/10">
+                    <div class="w-full h-full relative">
+                        <img id="slide-img" class="w-full h-full object-cover transition-opacity duration-500" src="https://images.unsplash.com/photo-1607513364986-ce0187889e47?auto=format&fit=crop&q=80&w=600&h=1200" alt="Feature Slide">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- BEGIN: Grid Features -->
+    <section id="features" class="w-full max-w-7xl mx-auto px-6 md:px-12 pb-16 bg-transparent reveal-up">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-t border-b border-[var(--border-color)] md:border-l md:border-r">
+            
+            <div class="p-8 md:p-10 border-b border-[var(--border-color)] lg:border-r lg:col-span-2 flex flex-col justify-between min-h-[280px] hover:bg-[var(--card-hover)] transition-colors group">
+                <div>
+                    <span class="text-xs font-bold text-accent-emerald font-geist tracking-widest block mb-4">01 / BRAND PROMISE</span>
+                    <h3 class="text-2xl md:text-3xl font-semibold text-primary mb-4 tracking-tight font-geist leading-tight">Zero Ads & Open Source</h3>
+                    <p class="text-on-surface-variant font-geist text-sm md:text-base leading-relaxed max-w-2xl">
+                        Browse thousands of Bedrock addons, completely ad-free forever. Open source code for absolute transparency and community-driven improvements.
+                    </p>
+                </div>
+            </div>
+
+            <div class="p-8 md:p-10 border-b border-[var(--border-color)] flex flex-col justify-between min-h-[280px] hover:bg-[var(--card-hover)] transition-colors group">
+                <div>
+                    <span class="text-xs font-bold text-accent-emerald font-geist tracking-widest block mb-4">02 / CORE FUNCTION</span>
+                    <h3 class="text-xl md:text-2xl font-semibold text-primary mb-4 tracking-tight font-geist leading-tight">Offline Support</h3>
+                    <p class="text-on-surface-variant font-geist text-sm leading-relaxed">
+                        Download your favorite addons and manage them locally without needing an internet connection.
+                    </p>
+                </div>
+            </div>
+
+            <div class="p-8 md:p-10 border-b border-[var(--border-color)] md:border-r flex flex-col justify-between min-h-[250px] hover:bg-[var(--card-hover)] transition-colors group">
+                <div>
+                    <span class="text-xs font-bold text-accent-emerald font-geist tracking-widest block mb-4">03 / ECOSYSTEM</span>
+                    <h3 class="text-xl font-semibold text-primary mb-4 tracking-tight font-geist leading-tight">Fast & Lightweight</h3>
+                    <p class="text-on-surface-variant font-geist text-sm leading-relaxed">
+                        Powered by Supabase for live sync. Instant local search, smooth pull-to-refresh, and optimized image caching ensure a snappy experience.
+                    </p>
+                </div>
+            </div>
+
+            <div class="p-8 md:p-10 border-b border-[var(--border-color)] lg:border-b-0 lg:border-r flex flex-col justify-between min-h-[250px] hover:bg-[var(--card-hover)] transition-colors group">
+                <div>
+                    <span class="text-xs font-bold text-accent-emerald font-geist tracking-widest block mb-4">04 / GLOBAL</span>
+                    <h3 class="text-xl font-semibold text-primary mb-4 tracking-tight font-geist leading-tight">Multi-language</h3>
+                    <p class="text-on-surface-variant font-geist text-sm leading-relaxed">
+                        Built-in localization support for 6+ languages. Content auto-translates to your device's native locale seamlessly.
+                    </p>
+                </div>
+            </div>
+
+            <div class="p-8 md:p-10 flex flex-col justify-between min-h-[250px] hover:bg-[var(--card-hover)] transition-colors group">
+                <div>
+                    <span class="text-xs font-bold text-accent-emerald font-geist tracking-widest block mb-4">05 / PERSONALIZATION</span>
+                    <h3 class="text-xl font-semibold text-primary mb-4 tracking-tight font-geist leading-tight">Material Design 3</h3>
+                    <p class="text-on-surface-variant font-geist text-sm leading-relaxed">
+                        Built with expressive Material 3 tokens, featuring customized diamond pickaxe animations and dynamic system theming.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- BEGIN: Community & Vision Section -->
+    <section id="community" class="w-full max-w-7xl mx-auto px-6 md:px-12 pt-8 reveal-up">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+
+            <!-- Left: Vision Text -->
+            <div class="lg:col-span-7 xl:col-span-7 pt-4">
+                <h2 class="text-4xl md:text-[48px] font-semibold tracking-tight md:tracking-[-0.04em] text-primary font-geist leading-[0.95] mb-8">
+                    Built by the Community
+                </h2>
+
+                <div class="space-y-6 text-on-surface-variant font-geist text-base md:text-lg leading-relaxed mb-10 max-w-3xl">
+                    <p>
+                        MC Addons is a free and open-source utility for Android that brings together the best modifications for Minecraft Bedrock. Built with premium design principles, it offers a seamless experience that gets you back into the game faster.
+                    </p>
+                    <p>
+                        The project is powered by a community of creators and developers who believe game modifications should be accessible to everyone, without intrusive ads and deceptive download links.
+                    </p>
+                </div>
+
+                <a href="https://github.com" target="_blank" class="inline-flex items-center justify-center gap-2 bg-primary text-[var(--dialog-bg)] px-8 py-3.5 rounded-xl text-sm font-bold hover:scale-105 hover:opacity-90 transition-all active:scale-95 shadow-lg w-full sm:w-auto">
+                    <span class="material-symbols-outlined text-[20px]">call_split</span>
+                    Contribute on GitHub
+                </a>
+            </div>
+
+            <!-- Right: Authors -->
+            <div class="lg:col-span-5 xl:col-span-5 flex flex-col sm:flex-row lg:flex-col gap-8 justify-center lg:justify-start lg:border-l lg:border-[var(--border-color)] lg:pl-16">
+                <!-- Creator 1 -->
+                <div class="flex flex-col items-center text-center w-full relative p-6 bg-black/[0.02] dark:bg-white/[0.02] border border-[var(--border-color)] rounded-3xl">
+                    <div class="relative w-24 h-24 rounded-full mb-4 p-1 bg-gradient-to-tr from-emerald-300 to-cyan-300 dark:from-emerald-700 dark:to-cyan-900 glow-avatar overflow-hidden">
+                        <div class="w-full h-full rounded-full border-2 border-white dark:border-slate-800 bg-emerald-100 dark:bg-emerald-900 flex items-center justify-center text-3xl font-bold text-emerald-600 dark:text-emerald-300">C</div>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-1 tracking-tight font-geist">cgens67</h3>
+                    <p class="text-slate-500 text-[10px] font-semibold uppercase tracking-widest mb-3 font-geist">Lead Developer</p>
+                    <p class="text-on-surface-variant font-geist text-xs leading-relaxed mb-5">
+                        Creator and lead developer. Passionate about building beautiful, open-source Android experiences.
+                    </p>
+                    <a href="https://github.com/cgens67" target="_blank" class="flex items-center justify-center gap-2 bg-black/5 dark:bg-white/10 border border-[var(--border-color)] text-primary px-6 py-2.5 rounded-xl text-xs font-bold hover:bg-black/10 dark:hover:bg-white/15 hover:scale-105 transition-all active:scale-95 shadow-sm w-full">
+                        <span class="material-symbols-outlined text-[16px]">account_circle</span>
+                        View Profile
+                    </a>
+                </div>
+
+                <!-- Creator 2 -->
+                <div class="flex flex-col items-center text-center w-full relative p-6 bg-black/[0.02] dark:bg-white/[0.02] border border-[var(--border-color)] rounded-3xl">
+                    <div class="relative w-24 h-24 rounded-full mb-4 p-1 bg-gradient-to-tr from-emerald-300 to-cyan-300 dark:from-emerald-700 dark:to-cyan-900 glow-avatar overflow-hidden">
+                        <div class="w-full h-full rounded-full border-2 border-white dark:border-slate-800 bg-cyan-100 dark:bg-cyan-900 flex items-center justify-center text-3xl font-bold text-cyan-600 dark:text-cyan-300">J</div>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-1 tracking-tight font-geist">Joseph Lim</h3>
+                    <p class="text-slate-500 text-[10px] font-semibold uppercase tracking-widest mb-3 font-geist">Co-Author & UI/UX</p>
+                    <p class="text-on-surface-variant font-geist text-xs leading-relaxed mb-5">
+                        Designing intuitive interfaces and crafting the expressive Material Design 3 language.
+                    </p>
+                    <a href="https://github.com" target="_blank" class="flex items-center justify-center gap-2 bg-black/5 dark:bg-white/10 border border-[var(--border-color)] text-primary px-6 py-2.5 rounded-xl text-xs font-bold hover:bg-black/10 dark:hover:bg-white/15 hover:scale-105 transition-all active:scale-95 shadow-sm w-full">
+                        <span class="material-symbols-outlined text-[16px]">account_circle</span>
+                        View Profile
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- GitHub Star Call to Action -->
+    <section class="w-full max-w-4xl mx-auto px-6 md:px-12 reveal-up">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center border-t border-[var(--border-color)] pt-16 pb-16">
+            <div class="md:col-span-8 text-left">
+                <h2 class="text-4xl md:text-[48px] font-semibold tracking-tight md:tracking-[-0.04em] text-primary font-geist leading-[0.95] mb-4">
+                    Love the Project?
+                </h2>
+                <p class="text-on-surface-variant font-geist text-base md:text-lg max-w-xl leading-relaxed">
+                    MC Addons is built with passion and shared completely for free. If you like the work, support us by starring our repository on GitHub!
+                </p>
+            </div>
+            <div class="md:col-span-4 flex justify-start md:justify-end w-full">
+                <a href="https://github.com" target="_blank" class="inline-flex items-center justify-center gap-2 bg-primary text-[var(--dialog-bg)] px-8 py-3.5 rounded-xl text-sm font-bold hover:opacity-90 hover:scale-105 transition-all active:scale-95 shadow-lg w-full sm:w-auto">
+                    <span class="material-symbols-outlined text-[20px] text-amber-400" style="font-variation-settings: 'FILL' 1;">star</span>
+                    Star on GitHub
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ready to Try Section -->
+    <section class="w-full max-w-4xl mx-auto px-6 md:px-12 pb-28 reveal-up">
+        <div class="flex flex-col items-center text-center border-t border-[var(--border-color)] pt-16">
+            <div class="text-primary mb-6">
+                <svg class="w-12 h-12 stroke-current" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2"></path>
+                    <path d="M7 11l5 5l5 -5"></path>
+                    <path d="M12 4l0 12"></path>
+                </svg>
+            </div>
+
+            <h2 class="text-4xl md:text-[48px] font-semibold tracking-tight md:tracking-[-0.04em] text-primary font-geist leading-[0.95] mb-6">
+                Ready to enhance Bedrock?
+            </h2>
+            <p class="text-on-surface-variant font-geist text-base md:text-lg max-w-xl mb-8 leading-relaxed">
+                Take control of your Minecraft mods today. Enjoy a fast, ad-free, and fully native Android open-source manager.
+            </p>
+
+            <div class="flex flex-col items-center justify-center gap-3 w-full sm:w-auto">
+                <button class="trigger-download-modal flex items-center justify-center gap-2 bg-primary text-[var(--dialog-bg)] px-8 py-3.5 rounded-xl text-sm font-bold hover:scale-105 hover:opacity-90 transition-all active:scale-95 shadow-lg w-full sm:w-auto">
+                    <span class="material-symbols-outlined text-[20px]">download</span>
+                    Download App
+                </button>
+                <div class="flex items-center gap-2 text-xs font-geist text-slate-500 select-none">
+                    <span class="border border-[var(--tag-border)] bg-[var(--tag-bg)] text-[var(--tag-text)] px-2 py-0.5 rounded-[4px] text-[10px] font-bold tracking-wider">Stable</span>
+                    <span>for Android 14+</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experimental Beta Section -->
+    <section id="beta-channel" class="w-full max-w-4xl mx-auto px-6 md:px-12 mb-16 reveal-up">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start border-t border-[var(--border-color)] pt-16 pb-16">
+            <div class="md:col-span-8 text-left">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold tracking-wide bg-amber-50 dark:bg-amber-950/30 text-amber-600 dark:text-amber-300 border border-amber-200 dark:border-amber-900 mb-4 select-none">
+                    <span class="material-symbols-outlined text-[14px]">science</span> Pre-releases
+                </span>
+                <h2 class="text-4xl md:text-[48px] font-semibold tracking-tight md:tracking-[-0.04em] text-primary font-geist leading-[0.95] mb-4">
+                    Try the Beta
+                </h2>
+                <p class="text-on-surface-variant font-geist text-base md:text-lg max-w-xl leading-relaxed mb-6">
+                    Get bleeding-edge updates built directly from the latest source code commits. Try new features and bug fixes before they release.
+                </p>
+                <div class="text-xs text-slate-500 leading-relaxed font-geist flex items-start gap-2 max-w-xl">
+                    <span class="material-symbols-outlined text-slate-400 text-[18px] select-none shrink-0 mt-0.5">info</span>
+                    <span>
+                        <strong>Note:</strong> Beta builds may contain experimental features and are intended for testing and feedback.
+                    </span>
+                </div>
+            </div>
+
+            <div class="md:col-span-4 flex flex-col items-start md:items-end justify-center w-full md:pt-14 select-none">
+                <a id="dl-btn-beta-section" href="#" class="flex items-center justify-center gap-2 bg-primary text-[var(--dialog-bg)] px-8 py-3.5 rounded-xl text-sm font-bold hover:scale-105 hover:opacity-90 transition-all active:scale-95 shadow-lg w-full">
+                    <span class="material-symbols-outlined text-[20px]">science</span>
+                    Download Beta
+                </a>
+                <div class="flex items-center gap-2 text-[10px] font-geist text-slate-400 mt-3 w-full justify-center md:justify-end">
+                    <span class="border border-[var(--tag-border)] bg-[var(--tag-bg)] px-1.5 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider text-[var(--tag-text)]">Pre-release</span>
+                    <span>Direct GitHub Build</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BEGIN: FAQ Section with Web Animations API Dropdowns -->
+    <section id="faq" class="w-full max-w-4xl mx-auto px-6 md:px-12 pb-32 reveal-up">
+        <div class="border-t border-[var(--border-color)] pt-16">
+            <h2 class="text-4xl md:text-[48px] font-semibold tracking-tight md:tracking-[-0.04em] text-primary font-geist leading-[0.95] mb-12 text-center">
+                Frequently Asked Questions
+            </h2>
+
+            <div class="space-y-0 rounded-2xl border border-[var(--border-color)] overflow-hidden shadow-sm">
+                <!-- FAQ Item 1 -->
+                <details class="faq-item group border-b border-[var(--border-color)]">
+                    <summary class="flex justify-between items-center p-6 text-primary font-geist font-medium text-base md:text-lg cursor-pointer select-none focus:outline-none hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
+                        <span>What is MC Addons?</span>
+                        <span class="material-symbols-outlined faq-chevron text-slate-400">expand_more</span>
+                    </summary>
+                    <div class="faq-content">
+                        <div class="px-6 pb-6 pt-0 text-on-surface-variant font-geist text-sm md:text-base leading-relaxed">
+                            MC Addons is a free and open-source utility app for Android. It lets you discover, download, and instantly import modifications (addons, worlds, and textures) directly into Minecraft Bedrock with one tap.
+                        </div>
+                    </div>
+                </details>
+
+                <!-- FAQ Item 2 -->
+                <details class="faq-item group border-b border-[var(--border-color)]">
+                    <summary class="flex justify-between items-center p-6 text-primary font-geist font-medium text-base md:text-lg cursor-pointer select-none focus:outline-none hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
+                        <span>Is it free and ad-free?</span>
+                        <span class="material-symbols-outlined faq-chevron text-slate-400">expand_more</span>
+                    </summary>
+                    <div class="faq-content">
+                        <div class="px-6 pb-6 pt-0 text-on-surface-variant font-geist text-sm md:text-base leading-relaxed">
+                            Yes, MC Addons is 100% free and open-source. It contains absolutely zero advertisements, paid subscriptions, or intrusive tracking.
+                        </div>
+                    </div>
+                </details>
+
+                <!-- FAQ Item 3 -->
+                <details class="faq-item group border-b border-[var(--border-color)]">
+                    <summary class="flex justify-between items-center p-6 text-primary font-geist font-medium text-base md:text-lg cursor-pointer select-none focus:outline-none hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
+                        <span>Does it work with Minecraft Java Edition?</span>
+                        <span class="material-symbols-outlined faq-chevron text-slate-400">expand_more</span>
+                    </summary>
+                    <div class="faq-content">
+                        <div class="px-6 pb-6 pt-0 text-on-surface-variant font-geist text-sm md:text-base leading-relaxed">
+                            No. This app is specifically designed for Minecraft Bedrock Edition (Android). It handles `.mcaddon`, `.mcpack`, and `.mcworld` file extensions which are incompatible with Java Edition.
+                        </div>
+                    </div>
+                </details>
+
+                <!-- FAQ Item 4 -->
+                <details class="faq-item group border-b border-[var(--border-color)]">
+                    <summary class="flex justify-between items-center p-6 text-primary font-geist font-medium text-base md:text-lg cursor-pointer select-none focus:outline-none hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
+                        <span>Are the addons safe to use?</span>
+                        <span class="material-symbols-outlined faq-chevron text-slate-400">expand_more</span>
+                    </summary>
+                    <div class="faq-content">
+                        <div class="px-6 pb-6 pt-0 text-on-surface-variant font-geist text-sm md:text-base leading-relaxed">
+                            Yes, the addons are sourced from community repositories and are standard Bedrock format files. The app simply manages the downloading and importing process into your local game.
+                        </div>
+                    </div>
+                </details>
+
+                <!-- FAQ Item 5 -->
+                <details class="faq-item group">
+                    <summary class="flex justify-between items-center p-6 text-primary font-geist font-medium text-base md:text-lg cursor-pointer select-none focus:outline-none hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
+                        <span>How do I install or update MC Addons?</span>
+                        <span class="material-symbols-outlined faq-chevron text-slate-400">expand_more</span>
+                    </summary>
+                    <div class="faq-content">
+                        <div class="px-6 pb-6 pt-0 text-on-surface-variant font-geist text-sm md:text-base leading-relaxed">
+                            You can download the APK directly using the download buttons on this site or from our GitHub Releases page. Simply install the APK file on your Android 14+ device.
+                        </div>
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+    <!-- END: FAQ Section -->
+
+    <!-- BEGIN: Footer -->
+    <footer class="border-t border-[var(--border-color)] bg-black/[0.02] dark:bg-white/[0.02] pt-16 pb-8 px-6 md:px-12">
+        <div class="container mx-auto max-w-7xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-16">
+            <!-- Logo & Description -->
+            <div class="col-span-1 flex flex-col gap-6">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-lg shadow-sm border border-[var(--border-color)] bg-gradient-to-br from-emerald-400 to-cyan-500 flex items-center justify-center text-white">
+                        <span class="material-symbols-outlined text-[20px]">category</span>
+                    </div>
+                    <span class="text-lg font-bold tracking-tight text-primary">MC Addons</span>
+                </div>
+                <p class="text-on-surface-variant font-body text-sm leading-relaxed max-w-xs pr-4">
+                    Crafting a clean, modern, and open-source Bedrock Addon experience for Android.
+                </p>
+                <div class="flex gap-4 mt-2">
+                    <a href="https://github.com" target="_blank" class="w-10 h-10 rounded-xl border border-[var(--border-color)] bg-black/5 dark:bg-white/5 flex items-center justify-center text-primary hover:bg-black/10 transition-colors shadow-sm">
+                        <span class="material-symbols-outlined text-[20px]">code</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Product Links -->
+            <div>
+                <h4 class="font-bold mb-6 text-base text-primary tracking-tight">Product</h4>
+                <ul class="space-y-4 text-sm text-on-surface-variant font-body">
+                    <li><a class="hover:text-primary transition-colors" href="#features">Features</a></li>
+                    <li><a class="trigger-download-modal hover:text-primary transition-colors cursor-pointer">Download</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="#screenshots">Gallery</a></li>
+                </ul>
+            </div>
+
+            <!-- Community Links -->
+            <div>
+                <h4 class="font-bold mb-6 text-base text-primary tracking-tight">Community</h4>
+                <ul class="space-y-4 text-sm text-on-surface-variant font-body">
+                    <li><a class="hover:text-primary transition-colors" href="https://github.com" target="_blank">GitHub Repository</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="https://github.com" target="_blank">Bug Reports</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="https://github.com" target="_blank">Releases</a></li>
+                </ul>
+            </div>
+
+            <!-- License Info -->
+            <div>
+                <h4 class="font-bold mb-6 text-base text-primary tracking-tight">Disclaimer</h4>
+                <p class="text-on-surface-variant font-body text-sm leading-relaxed mb-6 max-w-[280px]">
+                    Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft.
+                </p>
+                <div class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-[var(--border-color)] bg-black/5 dark:bg-white/5 text-primary text-xs font-semibold tracking-wide shadow-sm">
+                    <span class="material-symbols-outlined text-[16px] text-accent-emerald">verified</span> Fully Open Source
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Bar -->
+        <div class="container mx-auto max-w-7xl pt-8 border-t border-[var(--border-color)] flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-body text-slate-500">
+            <div class="flex items-center gap-4">
+                <p>© 2026 MC Addons. All rights reserved.</p>
+            </div>
+            <p class="flex items-center gap-1 flex-wrap justify-center md:justify-end">
+                <span>Created by</span>
+                <a href="https://github.com/cgens67" target="_blank" class="text-primary hover:underline transition-colors font-semibold">cgens67</a>
+                <span>and Joseph Lim</span>
+            </p>
+        </div>
+    </footer>
+    <!-- END: Footer -->
+
+    <!-- BEGIN: Download Modal (Latest & Beta Options) -->
+    <dialog id="download-modal" class="outline-none border-none">
+        <div class="dialog-backdrop"></div>
+
+        <div class="helium-dialog-container p-6 text-center relative z-10 shadow-2xl flex flex-col items-center gap-4">
+            <div class="flex flex-col items-center select-none">
+                <span class="material-symbols-outlined text-[40px] text-primary mb-[-4px]">android</span>
+                <h3 class="text-2xl font-bold text-primary tracking-tight font-instrument">Get MC Addons</h3>
+            </div>
+            <p class="text-on-surface-variant font-instrument text-base leading-relaxed mb-4 px-1">
+                Choose between the latest stable release or the experimental beta for Android.
+            </p>
+
+            <div class="grid grid-cols-2 gap-3 mb-3 w-full">
+                <!-- Choice 1: Latest (Stable) -->
+                <a id="dl-latest" href="#" target="_blank" class="helium-dialog-btn select-none group">
+                    <span class="material-symbols-outlined text-3xl group-hover:scale-110 transition-transform text-accent-emerald">download</span>
+                    <span class="text-base font-bold">Latest</span>
+                    <span id="dl-latest-label" class="text-xs text-slate-500 truncate max-w-full">Stable Build</span>
+                </a>
+
+                <!-- Choice 2: Beta (Pre-release) -->
+                <a id="dl-beta" href="#" target="_blank" class="helium-dialog-btn select-none group">
+                    <span class="material-symbols-outlined text-3xl group-hover:scale-110 transition-transform text-amber-500">science</span>
+                    <span class="text-base font-bold">Beta</span>
+                    <span id="dl-beta-label" class="text-xs text-slate-500 truncate max-w-full">Pre-release</span>
+                </a>
+            </div>
+
+            <!-- All Releases Link -->
+            <a href="https://github.com" target="_blank" class="helium-dialog-btn select-none group !flex-row !items-center !justify-start !text-left gap-3 w-full py-3 mb-2">
+                <span class="material-symbols-outlined text-2xl text-slate-400 shrink-0">history</span>
+                <div class="text-left flex-1 min-w-0">
+                    <span class="text-sm font-bold block leading-none mb-1 text-primary">All GitHub Releases</span>
+                    <span class="text-[11px] text-slate-500 leading-none block truncate">View release notes & older APKs</span>
+                </div>
+            </a>
+
+            <button id="close-download-modal" class="helium-dialog-btn-close">
+                Close
+            </button>
+        </div>
+    </dialog>
+    <!-- END: Download Modal -->
+
+    <!-- Application Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // --- 1. Theme Management (Light / Dark Mode Toggle) ---
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const themeIcon = document.getElementById('theme-icon');
+            const htmlElement = document.documentElement;
+
+            function applyTheme(isDark) {
+                if (isDark) {
+                    htmlElement.classList.add('dark');
+                    themeIcon.textContent = 'light_mode';
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    htmlElement.classList.remove('dark');
+                    themeIcon.textContent = 'dark_mode';
+                    localStorage.setItem('theme', 'light');
+                }
+            }
+
+            // Init theme from storage or system preference
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            applyTheme(savedTheme ? savedTheme === 'dark' : prefersDark);
+
+            themeToggleBtn.addEventListener('click', () => {
+                const isCurrentlyDark = htmlElement.classList.contains('dark');
+                applyTheme(!isCurrentlyDark);
+            });
+
+            // --- 2. Ultra-Smooth Animated Accordion for FAQ ---
+            class SmoothAccordion {
+                constructor(el) {
+                    this.el = el;
+                    this.summary = el.querySelector('summary');
+                    this.content = el.querySelector('.faq-content');
+                    this.animation = null;
+                    this.isClosing = false;
+                    this.isExpanding = false;
+                    this.summary.addEventListener('click', (e) => this.onClick(e));
+                }
+
+                onClick(e) {
+                    e.preventDefault();
+                    this.el.style.overflow = 'hidden';
+                    if (this.isClosing || !this.el.open) {
+                        this.open();
+                    } else if (this.isExpanding || this.el.open) {
+                        this.shrink();
+                    }
+                }
+
+                shrink() {
+                    this.isClosing = true;
+                    const startHeight = `${this.el.offsetHeight}px`;
+                    const endHeight = `${this.summary.offsetHeight}px`;
+
+                    if (this.animation) this.animation.cancel();
+
+                    this.animation = this.el.animate({
+                        height: [startHeight, endHeight]
+                    }, {
+                        duration: 320,
+                        easing: 'cubic-bezier(0.16, 1, 0.3, 1)'
+                    });
+
+                    this.animation.onfinish = () => this.onAnimationFinish(false);
+                    this.animation.oncancel = () => this.isClosing = false;
+                }
+
+                open() {
+                    this.el.style.height = `${this.el.offsetHeight}px`;
+                    this.el.open = true;
+                    window.requestAnimationFrame(() => this.expand());
+                }
+
+                expand() {
+                    this.isExpanding = true;
+                    const startHeight = `${this.el.offsetHeight}px`;
+                    const endHeight = `${this.summary.offsetHeight + this.content.offsetHeight}px`;
+
+                    if (this.animation) this.animation.cancel();
+
+                    this.animation = this.el.animate({
+                        height: [startHeight, endHeight]
+                    }, {
+                        duration: 380,
+                        easing: 'cubic-bezier(0.16, 1, 0.3, 1)'
+                    });
+
+                    this.animation.onfinish = () => this.onAnimationFinish(true);
+                    this.animation.oncancel = () => this.isExpanding = false;
+                }
+
+                onAnimationFinish(open) {
+                    this.el.open = open;
+                    this.animation = null;
+                    this.isClosing = false;
+                    this.isExpanding = false;
+                    this.el.style.height = '';
+                    this.el.style.overflow = '';
+                }
+            }
+
+            document.querySelectorAll('details.faq-item').forEach(el => new SmoothAccordion(el));
+
+            // --- 3. Reveal on Scroll (Intersection Observer) ---
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('reveal-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+            document.querySelectorAll('.reveal-up').forEach(el => observer.observe(el));
+
+            // --- 4. Navbar Scroll State ---
+            const navbar = document.getElementById('top-navbar');
+            navbar.classList.add('animate-nav');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 40) {
+                    navbar.classList.add('bg-[var(--nav-bg)]', 'backdrop-blur-md', 'shadow-sm', 'border-b', 'border-[var(--border-color)]');
+                } else {
+                    navbar.classList.remove('bg-[var(--nav-bg)]', 'backdrop-blur-md', 'shadow-sm', 'border-b', 'border-[var(--border-color)]');
+                }
+            });
+
+            // --- 5. Mobile Menu Toggle ---
+            const menuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuChevron = document.getElementById('mobile-menu-chevron');
+            menuBtn.addEventListener('click', () => {
+                const isHidden = mobileMenu.style.opacity === '0' || mobileMenu.style.opacity === '';
+                if (isHidden) {
+                    mobileMenu.style.opacity = '1';
+                    mobileMenu.style.transform = 'translateY(0)';
+                    mobileMenu.style.pointerEvents = 'auto';
+                    menuChevron.style.transform = 'rotate(180deg)';
+                } else {
+                    mobileMenu.style.opacity = '0';
+                    mobileMenu.style.transform = 'translateY(-16px)';
+                    mobileMenu.style.pointerEvents = 'none';
+                    menuChevron.style.transform = 'rotate(0deg)';
+                }
+            });
+
+            // --- 6. Modal Dialog Handlers ---
+            const modal = document.getElementById('download-modal');
+            const openBtns = document.querySelectorAll('.trigger-download-modal');
+            const closeBtn = document.getElementById('close-download-modal');
+            const backdrop = modal.querySelector('.dialog-backdrop');
+
+            function openModal() {
+                modal.showModal();
+                setTimeout(() => modal.classList.add('is-open'), 10);
+            }
+            function closeModal() {
+                modal.classList.remove('is-open');
+                setTimeout(() => modal.close(), 250); 
+            }
+            openBtns.forEach(btn => btn.addEventListener('click', e => { e.preventDefault(); openModal(); }));
+            closeBtn.addEventListener('click', closeModal);
+            backdrop.addEventListener('click', closeModal);
+
+            // --- 7. Analog Odometer Counter Animation Helper ---
+            function animateValue(id, end, duration, suffix) {
+                const obj = document.getElementById(id);
+                if (!obj) return;
+                
+                obj.innerHTML = '';
+                obj.style.display = 'inline-flex';
+                obj.style.alignItems = 'center';
+                
+                const numStr = end.toLocaleString(); 
+                const counterWrap = document.createElement('div');
+                counterWrap.style.display = 'inline-flex';
+                counterWrap.style.overflow = 'hidden';
+                counterWrap.style.height = '1.2em';
+                counterWrap.style.lineHeight = '1.2';
+                
+                numStr.split('').forEach((char, index) => {
+                    if (isNaN(char) || char === ' ') {
+                        // Commas and spaces
+                        const staticChar = document.createElement('span');
+                        staticChar.textContent = char;
+                        staticChar.style.height = '1.2em';
+                        staticChar.style.lineHeight = '1.2';
+                        staticChar.style.display = 'flex';
+                        staticChar.style.alignItems = 'center';
+                        counterWrap.appendChild(staticChar);
+                    } else {
+                        // Digits logic
+                        const targetNum = parseInt(char, 10);
+                        const digitWrap = document.createElement('div');
+                        digitWrap.style.display = 'inline-flex';
+                        digitWrap.style.flexDirection = 'column';
+                        
+                        // Stagger the rolling effect from left to right
+                        const staggeredDuration = 1.2 + (index * 0.25);
+                        digitWrap.style.transition = `transform ${staggeredDuration}s cubic-bezier(0.23, 1, 0.32, 1)`;
+                        
+                        let html = '';
+                        const spins = 2; // Full rotations
+                        for (let i = 0; i < spins; i++) {
+                            for (let j = 0; j <= 9; j++) {
+                                html += `<span style="height: 1.2em; line-height: 1.2; display: flex; align-items: center; justify-content: center;">${j}</span>`;
+                            }
+                        }
+                        for (let j = 0; j <= targetNum; j++) {
+                            html += `<span style="height: 1.2em; line-height: 1.2; display: flex; align-items: center; justify-content: center;">${j}</span>`;
+                        }
+                        
+                        digitWrap.innerHTML = html;
+                        
+                        const digitContainer = document.createElement('div');
+                        digitContainer.style.display = 'inline-flex';
+                        digitContainer.style.overflow = 'hidden';
+                        digitContainer.style.height = '1.2em';
+                        digitContainer.appendChild(digitWrap);
+                        
+                        counterWrap.appendChild(digitContainer);
+                        
+                        // Trigger reflow and apply transform
+                        requestAnimationFrame(() => {
+                            requestAnimationFrame(() => {
+                                const totalDigits = (spins * 10) + targetNum;
+                                digitWrap.style.transform = `translateY(-${totalDigits * 1.2}em)`;
+                            });
+                        });
+                    }
+                });
+
+                obj.appendChild(counterWrap);
+                
+                if (suffix) {
+                    const suffixEl = document.createElement('span');
+                    // Explicitly use innerHTML with &nbsp; to prevent flex from stripping the leading space
+                    suffixEl.innerHTML = '&nbsp;' + suffix.trim();
+                    suffixEl.style.lineHeight = '1.2';
+                    suffixEl.style.display = 'flex';
+                    suffixEl.style.alignItems = 'center';
+                    obj.appendChild(suffixEl);
+                }
+            }
+
+            // --- 8. Fallback Stats (Since no repo might exist yet) ---
+            // Trigger animation immediately with fallback stats
+            setTimeout(() => {
+                animateValue('github-stars-hero', 1250, 2000, 'GitHub stars');
+                animateValue('total-downloads-hero', 45000, 2500, 'total downloads');
+            }, 300);
+
+
+            // --- 9. Carousel Logic ---
+            const slides = [
+                {
+                    title: "One-Tap Install",
+                    desc: "Automatically packages and launches `.mcaddon`, `.mcpack`, and `.mcworld` files straight into Minecraft. No file managers needed.",
+                    img: "https://images.unsplash.com/photo-1607513364986-ce0187889e47?auto=format&fit=crop&q=80&w=600&h=1200",
+                    tag: "CORE FEATURE"
+                },
+                {
+                    title: "Seamless Discovery",
+                    desc: "Access an entire community of Bedrock creators seamlessly. Everything is categorized by addons, textures, and worlds.",
+                    img: "https://images.unsplash.com/photo-1607513364945-e51c897f2674?auto=format&fit=crop&q=80&w=600&h=1200",
+                    tag: "ORGANIZATION"
+                },
+                {
+                    title: "Multi-language",
+                    desc: "Built-in localization support for 6+ languages. Content auto-translates to your device's native locale seamlessly.",
+                    img: "https://images.unsplash.com/photo-1596726149156-f7c1305417df?auto=format&fit=crop&q=80&w=600&h=1200",
+                    tag: "GLOBAL"
+                }
+            ];
+
+            let currentSlide = 0;
+            let slideInterval;
+            const SLIDE_DURATION = 8000;
+
+            const titleEl = document.getElementById('slide-title');
+            const descEl = document.getElementById('slide-desc');
+            const imgEl = document.getElementById('slide-img');
+            const tagEl = document.getElementById('slide-tagline');
+            const dotsContainer = document.getElementById('pagination-dots');
+            const progressBar = document.getElementById('autoplay-progress');
+            
+            slides.forEach((_, idx) => {
+                const dot = document.createElement('button');
+                dot.className = `h-2.5 rounded-full transition-all duration-300 border-none outline-none`;
+                dot.addEventListener('click', () => goToSlide(idx));
+                dotsContainer.appendChild(dot);
+            });
+
+            function updateSlide() {
+                const contentWrapper = document.getElementById('carousel-content');
+                contentWrapper.style.opacity = 0;
+                
+                setTimeout(() => {
+                    titleEl.textContent = slides[currentSlide].title;
+                    descEl.textContent = slides[currentSlide].desc;
+                    tagEl.textContent = slides[currentSlide].tag;
+                    contentWrapper.style.opacity = 1;
+                }, 200);
+
+                imgEl.style.opacity = 0;
+                setTimeout(() => {
+                    imgEl.src = slides[currentSlide].img;
+                    imgEl.style.opacity = 1;
+                }, 200);
+
+                Array.from(dotsContainer.children).forEach((dot, idx) => {
+                    if (idx === currentSlide) {
+                        dot.classList.add('bg-primary', 'w-6');
+                        dot.classList.remove('bg-black/15', 'dark:bg-white/20', 'w-2.5');
+                    } else {
+                        dot.classList.remove('bg-primary', 'w-6');
+                        dot.classList.add('bg-black/15', 'dark:bg-white/20', 'w-2.5');
+                    }
+                });
+
+                resetProgress();
+            }
+
+            function resetProgress() {
+                clearInterval(slideInterval);
+                progressBar.style.transition = 'none';
+                progressBar.style.width = '0%';
+                
+                setTimeout(() => {
+                    progressBar.style.transition = `width ${SLIDE_DURATION}ms linear`;
+                    progressBar.style.width = '100%';
+                }, 40);
+
+                slideInterval = setInterval(() => {
+                    goToSlide((currentSlide + 1) % slides.length);
+                }, SLIDE_DURATION);
+            }
+
+            function goToSlide(index) {
+                currentSlide = index;
+                updateSlide();
+            }
+
+            document.getElementById('btn-prev').addEventListener('click', () => {
+                goToSlide(currentSlide === 0 ? slides.length - 1 : currentSlide - 1);
+            });
+            document.getElementById('btn-next').addEventListener('click', () => {
+                goToSlide((currentSlide + 1) % slides.length);
+            });
+
+            updateSlide();
+
+            // --- 10. Dynamic Mockups ---
+            const dynamicMockups = document.getElementById('dynamic-mockups');
+            if (dynamicMockups) {
+                const mockupsData = [
+                    { 
+                        title: 'Modern UI Addon', author: 'Team UI',
+                        src: 'https://images.unsplash.com/photo-1607513364986-ce0187889e47?auto=format&fit=crop&q=80&w=600&h=1200', 
+                        py: 40, delay: 50 
+                    },
+                    { 
+                        title: 'Faithful 32x', author: 'Team Faithful',
+                        src: 'https://images.unsplash.com/photo-1607513364945-e51c897f2674?auto=format&fit=crop&q=80&w=600&h=1200', 
+                        py: 0, delay: 100 
+                    },
+                    { 
+                        title: 'Skyblock Mega', author: 'Map Makers',
+                        src: 'https://images.unsplash.com/photo-1596726149156-f7c1305417df?auto=format&fit=crop&q=80&w=600&h=1200', 
+                        py: 20, delay: 150 
+                    },
+                    { 
+                        title: 'OneBlock Survival', author: 'Joseph Lim',
+                        src: 'https://images.unsplash.com/photo-1605901309584-818e25960b8f?auto=format&fit=crop&q=80&w=600&h=1200', 
+                        py: 55, delay: 200 
+                    }
+                ];
+                
+                mockupsData.forEach((mockup, index) => {
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'snap-center shrink-0 w-[230px] md:w-[270px] reveal-up pb-12 pt-6';
+                    wrapper.style.transitionDelay = `${mockup.delay}ms`;
+
+                    const item = document.createElement('div');
+                    item.className = 'mockup-item relative w-full h-full';
+                    item.style.setProperty('--py', `${mockup.py}px`);
+                    
+                    const frame = document.createElement('div');
+                    frame.className = 'relative w-full aspect-[9/19] rounded-[2.5rem] border-[6px] border-slate-900 dark:border-white/20 bg-black overflow-hidden phone-frame transition-all duration-300 group';
+                    
+                    const img = document.createElement('img');
+                    img.alt = `Screenshot ${index + 1}`;
+                    img.className = 'w-full h-full object-cover transition-transform duration-700 group-hover:scale-105';
+                    img.src = mockup.src;
+
+                    // Reconstruct app overlay to look like a functional app preview
+                    const overlay = document.createElement('div');
+                    overlay.className = 'absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-5';
+                    overlay.innerHTML = `
+                        <h4 class="text-white font-bold text-lg leading-tight mb-1">${mockup.title}</h4>
+                        <p class="text-slate-300 text-xs mb-4">by ${mockup.author}</p>
+                        <button class="w-full bg-emerald-500 text-white font-semibold text-sm py-3 rounded-xl shadow-md">Install</button>
+                    `;
+
+                    frame.appendChild(img);
+                    frame.appendChild(overlay);
+                    item.appendChild(frame);
+                    wrapper.appendChild(item);
+                    dynamicMockups.appendChild(wrapper);
+                    
+                    observer.observe(wrapper);
+                });
+
+                // Parallax Mouse Effect
+                const gallerySection = dynamicMockups.closest('section');
+                if (gallerySection) {
+                    gallerySection.addEventListener('mousemove', (e) => {
+                        const rect = gallerySection.getBoundingClientRect();
+                        const centerX = rect.left + rect.width / 2;
+                        const x = (e.clientX - centerX) * 0.05;
+
+                        const items = dynamicMockups.querySelectorAll('.mockup-item');
+                        items.forEach((item, index) => {
+                            const depth = 1 + (index % 2 === 0 ? 0.2 : -0.2); 
+                            item.style.setProperty('--px', `${x * depth}px`);
+                        });
+                    });
+
+                    gallerySection.addEventListener('mouseleave', () => {
+                        const items = dynamicMockups.querySelectorAll('.mockup-item');
+                        items.forEach(item => {
+                            item.style.setProperty('--px', `0px`);
+                        });
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+</html>
