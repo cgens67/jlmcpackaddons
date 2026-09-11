@@ -8,7 +8,7 @@
     <meta name="description" content="Discover and install texture packs, behavior packs, and custom worlds directly into Minecraft Bedrock with instant installation.">
 
     <!-- Favicon -->
-    <link rel="icon" href="svg/app.svg" sizes="any">
+    <link rel="icon" href="assets/svg/app.svg" sizes="any">
 
     <!-- Google Fonts: Sora, Geist, Instrument Sans, Material Symbols -->
     <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -372,7 +372,7 @@
     <nav id="top-navbar" class="fixed top-0 w-full z-[100] py-5 px-6 md:px-12 flex justify-between items-center transform -translate-y-full opacity-0 animate-nav">
         <div class="flex items-center gap-2">
             <a href="/" class="flex items-center gap-3">
-                <img src="svg/app.svg" alt="MC Addons Logo" class="w-8 h-8 rounded-lg object-cover shadow-sm border border-slate-200 dark:border-slate-800" decoding="async" />
+                <img src="assets/svg/app.svg" alt="MC Addons Logo" class="w-8 h-8 rounded-lg object-cover shadow-sm border border-slate-200 dark:border-slate-800" decoding="async" />
                 <span class="text-xl font-bold tracking-tight text-primary">MC Addons</span>
             </a>
         </div>
@@ -422,7 +422,7 @@
     <main id="home" class="relative min-h-screen pt-32 pb-20 overflow-hidden">
         <!-- Hero Section -->
         <section class="container mx-auto px-6 text-center relative z-10 reveal-up">
-            <img src="svg/app.svg" alt="MC Addons Logo" class="w-16 h-16 rounded-2xl mx-auto mb-8 shadow-md border border-[var(--border-color)]" decoding="async" />
+            <img src="assets/svg/app.svg" alt="MC Addons Logo" class="w-16 h-16 rounded-2xl mx-auto mb-8 shadow-md border border-[var(--border-color)]" decoding="async" />
 
             <h1 class="text-4xl md:text-[54px] font-semibold mb-6 tracking-tight md:tracking-[-0.04em] text-primary font-geist leading-[1.1] max-w-[800px] mx-auto flex items-center justify-center flex-wrap">
                 Download & Import Bedrock Addons in One Tap
@@ -470,7 +470,7 @@
             <div class="relative z-20 w-64 md:w-72 aspect-[9/18.5] bg-slate-900 rounded-[3rem] p-3 border-[6px] border-[var(--mockup-border)] shadow-2xl">
                 <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-slate-900 rounded-b-2xl z-30"></div>
                 <div class="w-full h-full rounded-[2.2rem] overflow-hidden bg-slate-950">
-                    <img alt="MC Addons App Preview" class="w-full h-full object-cover" src="images/mainlistscreen.jpg">
+                    <img alt="MC Addons App Preview" class="w-full h-full object-cover" src="assets/images/mainlistscreen.jpg">
                 </div>
             </div>
         </section>
@@ -540,7 +540,7 @@
             <div class="flex justify-center items-center order-1 lg:order-2 w-full">
                 <div class="relative w-[240px] md:w-[300px] aspect-[9/19.5] rounded-[2.5rem] border-[6px] border-[var(--mockup-border)] bg-black overflow-hidden shadow-2xl shadow-black/10">
                     <div class="w-full h-full relative">
-                        <img id="slide-img" class="w-full h-full object-cover transition-opacity duration-500" src="images/mainlistscreen.jpg" alt="Feature Slide">
+                        <img id="slide-img" class="w-full h-full object-cover transition-opacity duration-500" src="assets/images/mainlistscreen.jpg" alt="Feature Slide">
                     </div>
                 </div>
             </div>
@@ -822,7 +822,7 @@
             <!-- Logo & Description -->
             <div class="col-span-1 flex flex-col gap-6">
                 <div class="flex items-center gap-3">
-                    <img src="svg/app.svg" alt="MC Addons Logo" class="w-8 h-8 rounded-lg object-cover shadow-sm border border-[var(--border-color)]" />
+                    <img src="assets/svg/app.svg" alt="MC Addons Logo" class="w-8 h-8 rounded-lg object-cover shadow-sm border border-[var(--border-color)]" />
                     <span class="text-lg font-bold tracking-tight text-primary">MC Addons</span>
                 </div>
                 <p class="text-on-surface-variant font-body text-sm leading-relaxed max-w-xs pr-4">
@@ -1237,19 +1237,19 @@
                 {
                     title: "Discover Addons",
                     desc: "Browse thousands of Bedrock addons seamlessly. Everything is neatly categorized and instantly accessible right from your device.",
-                    img: "images/mainlistscreen.jpg",
+                    img: "assets/images/mainlistscreen.jpg",
                     tag: "CORE FEATURE"
                 },
                 {
                     title: "Customizable UI",
                     desc: "Tailor the interface with customizable themes, agile layouts, and Material Design 3 component styling to match your preferences.",
-                    img: "images/appearancesettings.jpg",
+                    img: "assets/images/appearancesettings.jpg",
                     tag: "PERSONALIZATION"
                 },
                 {
                     title: "Multi-language Support",
                     desc: "Built-in localization support. The app adapts directly to your device's locale seamlessly so you can read everything natively.",
-                    img: "images/languageselector.jpg",
+                    img: "assets/images/languageselector.jpg",
                     tag: "GLOBAL"
                 }
             ];
@@ -1335,10 +1335,10 @@
             const dynamicMockups = document.getElementById('dynamic-mockups');
             if (dynamicMockups) {
                 const mockupsData = [
-                    { src: 'images/mainlistscreen.jpg', py: 40, delay: 50 },
-                    { src: 'images/languageselector.jpg', py: 0, delay: 100 },
-                    { src: 'images/appearancesettings.jpg', py: 20, delay: 150 },
-                    { src: 'images/settingsscreen1.jpg', py: 55, delay: 200 }
+                    { src: 'assets/images/mainlistscreen.jpg', py: 40, delay: 50 },
+                    { src: 'assets/images/languageselector.jpg', py: 0, delay: 100 },
+                    { src: 'assets/images/appearancesettings.jpg', py: 20, delay: 150 },
+                    { src: 'assets/images/settingsscreen1.jpg', py: 55, delay: 200 }
                 ];
                 
                 mockupsData.forEach((mockup, index) => {
