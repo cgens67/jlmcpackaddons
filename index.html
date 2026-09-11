@@ -7,6 +7,9 @@
     <title>MC Addons — Download & Import Bedrock Addons</title>
     <meta name="description" content="Discover and install texture packs, behavior packs, and custom worlds directly into Minecraft Bedrock with instant installation.">
 
+    <!-- Favicon -->
+    <link rel="icon" href="https://raw.githubusercontent.com/cgens67/jlmcpackaddons/main/assets/svg/app.svg" sizes="any">
+
     <!-- Google Fonts: Sora, Geist, Instrument Sans, Material Symbols -->
     <link href="https://fonts.googleapis.com" rel="preconnect">
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
@@ -56,7 +59,7 @@
     <!-- Custom Glassmorphism, Dual Themes & Animations -->
     <style>
         :root {
-            /* Standard Light Mode Colors (Adapted for Emerald/Cyan MC Theme) */
+            /* Standard Light Mode Colors (Emerald/Cyan Theme) */
             --bg-gradient: radial-gradient(circle at 50% 0%, #f0fdf4 0%, #f8fafc 40%, #ffffff 100%);
             --text-primary: #09090b;
             --text-muted: #475569;
@@ -369,9 +372,7 @@
     <nav id="top-navbar" class="fixed top-0 w-full z-[100] py-5 px-6 md:px-12 flex justify-between items-center transform -translate-y-full opacity-0 animate-nav">
         <div class="flex items-center gap-2">
             <a href="/" class="flex items-center gap-3">
-                <div class="w-8 h-8 rounded-lg shadow-sm border border-slate-200 dark:border-slate-800 bg-gradient-to-br from-emerald-400 to-cyan-500 flex items-center justify-center text-white">
-                    <span class="material-symbols-outlined text-[20px]">category</span>
-                </div>
+                <img src="https://raw.githubusercontent.com/cgens67/jlmcpackaddons/main/assets/svg/app.svg" alt="MC Addons Logo" class="w-8 h-8 rounded-lg object-cover shadow-sm border border-slate-200 dark:border-slate-800" decoding="async" />
                 <span class="text-xl font-bold tracking-tight text-primary">MC Addons</span>
             </a>
         </div>
@@ -382,7 +383,7 @@
                 <a class="nav-link" href="#features">Features</a>
                 <a class="nav-link" href="#faq">FAQ</a>
                 <a class="nav-link" href="#community">Creators</a>
-                <a class="nav-link" href="https://github.com" target="_blank">GitHub</a>
+                <a class="nav-link" href="https://github.com/cgens67/mcaddonsapp" target="_blank">GitHub</a>
             </div>
 
             <div class="flex items-center gap-3">
@@ -408,7 +409,7 @@
             <a class="mobile-menu-link" href="#features">Features</a>
             <a class="mobile-menu-link" href="#faq">FAQ</a>
             <a class="mobile-menu-link" href="#community">Creators</a>
-            <a class="mobile-menu-link flex items-center gap-1" href="https://github.com" target="_blank">
+            <a class="mobile-menu-link flex items-center gap-1" href="https://github.com/cgens67/mcaddonsapp" target="_blank">
                 GitHub <span class="material-symbols-outlined text-[16px] opacity-60">open_in_new</span>
             </a>
             <button class="trigger-download-modal flex items-center justify-center gap-2 bg-primary text-[var(--dialog-bg)] px-5 py-2.5 rounded-full text-sm font-bold shadow-md w-full">
@@ -421,9 +422,7 @@
     <main id="home" class="relative min-h-screen pt-32 pb-20 overflow-hidden">
         <!-- Hero Section -->
         <section class="container mx-auto px-6 text-center relative z-10 reveal-up">
-            <div class="w-16 h-16 rounded-2xl mx-auto mb-8 shadow-md border border-[var(--border-color)] bg-gradient-to-br from-emerald-400 to-cyan-500 flex items-center justify-center text-white">
-                <span class="material-symbols-outlined text-[36px]">view_in_ar</span>
-            </div>
+            <img src="https://raw.githubusercontent.com/cgens67/jlmcpackaddons/main/assets/svg/app.svg" alt="MC Addons Logo" class="w-16 h-16 rounded-2xl mx-auto mb-8 shadow-md border border-[var(--border-color)]" decoding="async" />
 
             <h1 class="text-4xl md:text-[54px] font-semibold mb-6 tracking-tight md:tracking-[-0.04em] text-primary font-geist leading-[1.1] max-w-[800px] mx-auto flex items-center justify-center flex-wrap">
                 Download & Import Bedrock Addons in One Tap
@@ -436,9 +435,9 @@
                 <div class="flex flex-col sm:flex-row items-center justify-center gap-3 w-full sm:w-auto">
                     <button class="trigger-download-modal flex items-center justify-center gap-2 bg-primary text-[var(--dialog-bg)] px-8 py-3.5 rounded-xl text-sm font-bold hover:scale-105 hover:opacity-90 transition-all active:scale-95 shadow-lg w-full sm:w-auto">
                         <span class="material-symbols-outlined text-[20px]">android</span>
-                        Download APK (v0.9.0)
+                        Download App
                     </button>
-                    <a href="https://github.com" target="_blank" class="flex items-center justify-center gap-2 bg-black/5 dark:bg-white/10 text-primary border border-[var(--border-color)] px-8 py-3.5 rounded-xl text-sm font-bold hover:bg-black/10 dark:hover:bg-white/15 hover:scale-105 transition-all active:scale-95 shadow-sm w-full sm:w-auto">
+                    <a href="https://github.com/cgens67/mcaddonsapp" target="_blank" class="flex items-center justify-center gap-2 bg-black/5 dark:bg-white/10 text-primary border border-[var(--border-color)] px-8 py-3.5 rounded-xl text-sm font-bold hover:bg-black/10 dark:hover:bg-white/15 hover:scale-105 transition-all active:scale-95 shadow-sm w-full sm:w-auto">
                         <svg viewBox="0 0 24 24" class="w-5 h-5 fill-current"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
                         View on GitHub
                     </a>
@@ -466,18 +465,12 @@
             </div>
         </section>
 
-        <!-- Hero Mockup -->
+        <!-- Hero Mockup without floating animation -->
         <section class="relative max-w-4xl mx-auto mt-12 px-6 flex flex-col items-center justify-center reveal-up" style="transition-delay: 200ms;">
             <div class="relative z-20 w-64 md:w-72 aspect-[9/18.5] bg-slate-900 rounded-[3rem] p-3 border-[6px] border-[var(--mockup-border)] shadow-2xl">
                 <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-slate-900 rounded-b-2xl z-30"></div>
-                <div class="w-full h-full rounded-[2.2rem] overflow-hidden bg-slate-950 relative group">
-                    <img alt="MC Addons App Preview" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://images.unsplash.com/photo-1607513364986-ce0187889e47?auto=format&fit=crop&q=80&w=600&h=1200">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-5">
-                        <span class="px-3 py-1 bg-emerald-500 text-white text-[10px] font-bold rounded-full w-max mb-2">ADDON</span>
-                        <h4 class="text-white font-bold text-lg leading-tight mb-1">Dynamic Lighting</h4>
-                        <p class="text-slate-300 text-xs mb-4">by Bedrock Devs</p>
-                        <button class="w-full bg-emerald-500 text-white font-semibold text-sm py-3 rounded-xl shadow-md">Install</button>
-                    </div>
+                <div class="w-full h-full rounded-[2.2rem] overflow-hidden bg-slate-950">
+                    <img alt="MC Addons App Preview" class="w-full h-full object-cover" src="https://raw.githubusercontent.com/cgens67/jlmcpackaddons/main/assets/images/mainlistscreen.jpg">
                 </div>
             </div>
         </section>
@@ -490,12 +483,13 @@
                 Seamless <br />Addon Browsing.
             </h1>
             <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto mb-10">
-                Search, filter, and import in seconds. A Material 3 interface that beautifully adapts to your system theme.
+                Experience a Material Design 3 interface that beautifully adapts to your system theme, making finding mods a breeze.
             </p>
         </section>
 
         <!-- Phone Mockups Showcase -->
         <section class="relative w-full pt-12 mockup-container">
+            <!-- Increased padding here (py-12 md:py-16) to ensure the 1.08x scale and -30px translate3d on hover don't hit the scroll container's clipping box -->
             <div id="dynamic-mockups" class="flex justify-start md:justify-center items-center md:items-end gap-6 md:gap-12 px-6 md:px-12 overflow-x-auto no-scrollbar min-h-[550px] md:min-h-[750px] snap-x snap-mandatory pt-12 pb-16">
                 <!-- Javascript will inject mockup items here for staggered and parallax gallery animation -->
             </div>
@@ -514,10 +508,10 @@
                         CORE FEATURE
                     </div>
                     <h2 id="slide-title" class="text-4xl md:text-6xl font-bold text-primary tracking-tighter leading-[1.1] mb-6 font-geist">
-                        One-Tap Install
+                        Discover Addons
                     </h2>
                     <p id="slide-desc" class="text-on-surface-variant font-body text-base md:text-lg leading-relaxed max-w-xl mb-8">
-                        Automatically packages and launches `.mcaddon`, `.mcpack`, and `.mcworld` files straight into Minecraft. No file managers needed.
+                        Browse thousands of Bedrock addons seamlessly. Everything is neatly categorized and instantly accessible right from your device.
                     </p>
                 </div>
 
@@ -546,7 +540,7 @@
             <div class="flex justify-center items-center order-1 lg:order-2 w-full">
                 <div class="relative w-[240px] md:w-[300px] aspect-[9/19.5] rounded-[2.5rem] border-[6px] border-[var(--mockup-border)] bg-black overflow-hidden shadow-2xl shadow-black/10">
                     <div class="w-full h-full relative">
-                        <img id="slide-img" class="w-full h-full object-cover transition-opacity duration-500" src="https://images.unsplash.com/photo-1607513364986-ce0187889e47?auto=format&fit=crop&q=80&w=600&h=1200" alt="Feature Slide">
+                        <img id="slide-img" class="w-full h-full object-cover transition-opacity duration-500" src="https://raw.githubusercontent.com/cgens67/jlmcpackaddons/main/assets/images/mainlistscreen.jpg" alt="Feature Slide">
                     </div>
                 </div>
             </div>
@@ -561,9 +555,9 @@
             <div class="p-8 md:p-10 border-b border-[var(--border-color)] lg:border-r lg:col-span-2 flex flex-col justify-between min-h-[280px] hover:bg-[var(--card-hover)] transition-colors group">
                 <div>
                     <span class="text-xs font-bold text-accent-emerald font-geist tracking-widest block mb-4">01 / BRAND PROMISE</span>
-                    <h3 class="text-2xl md:text-3xl font-semibold text-primary mb-4 tracking-tight font-geist leading-tight">Zero Ads & Open Source</h3>
+                    <h3 class="text-2xl md:text-3xl font-semibold text-primary mb-4 tracking-tight font-geist leading-tight">Ad-Free & Open Source</h3>
                     <p class="text-on-surface-variant font-geist text-sm md:text-base leading-relaxed max-w-2xl">
-                        Browse thousands of Bedrock addons, completely ad-free forever. Open source code for absolute transparency and community-driven improvements.
+                        Seamlessly import mods directly to Minecraft Bedrock completely ad-free forever. Open source code for absolute transparency.
                     </p>
                 </div>
             </div>
@@ -571,9 +565,9 @@
             <div class="p-8 md:p-10 border-b border-[var(--border-color)] flex flex-col justify-between min-h-[280px] hover:bg-[var(--card-hover)] transition-colors group">
                 <div>
                     <span class="text-xs font-bold text-accent-emerald font-geist tracking-widest block mb-4">02 / CORE FUNCTION</span>
-                    <h3 class="text-xl md:text-2xl font-semibold text-primary mb-4 tracking-tight font-geist leading-tight">Offline Support</h3>
+                    <h3 class="text-xl md:text-2xl font-semibold text-primary mb-4 tracking-tight font-geist leading-tight">One-Tap Install</h3>
                     <p class="text-on-surface-variant font-geist text-sm leading-relaxed">
-                        Download your favorite addons and manage them locally without needing an internet connection.
+                        Automatically packages and launches `.mcaddon`, `.mcpack`, and `.mcworld` files straight into Minecraft without using any file managers.
                     </p>
                 </div>
             </div>
@@ -583,7 +577,7 @@
                     <span class="text-xs font-bold text-accent-emerald font-geist tracking-widest block mb-4">03 / ECOSYSTEM</span>
                     <h3 class="text-xl font-semibold text-primary mb-4 tracking-tight font-geist leading-tight">Fast & Lightweight</h3>
                     <p class="text-on-surface-variant font-geist text-sm leading-relaxed">
-                        Powered by Supabase for live sync. Instant local search, smooth pull-to-refresh, and optimized image caching ensure a snappy experience.
+                        Instant local search, smooth pull-to-refresh, and optimized caching ensures a snappy browsing experience.
                     </p>
                 </div>
             </div>
@@ -591,9 +585,9 @@
             <div class="p-8 md:p-10 border-b border-[var(--border-color)] lg:border-b-0 lg:border-r flex flex-col justify-between min-h-[250px] hover:bg-[var(--card-hover)] transition-colors group">
                 <div>
                     <span class="text-xs font-bold text-accent-emerald font-geist tracking-widest block mb-4">04 / GLOBAL</span>
-                    <h3 class="text-xl font-semibold text-primary mb-4 tracking-tight font-geist leading-tight">Multi-language</h3>
+                    <h3 class="text-xl font-semibold text-primary mb-4 tracking-tight font-geist leading-tight">Multi-language Support</h3>
                     <p class="text-on-surface-variant font-geist text-sm leading-relaxed">
-                        Built-in localization support for 6+ languages. Content auto-translates to your device's native locale seamlessly.
+                        Built-in localization support. The app adapts directly to your device's locale so you can find mods in your preferred language.
                     </p>
                 </div>
             </div>
@@ -603,7 +597,7 @@
                     <span class="text-xs font-bold text-accent-emerald font-geist tracking-widest block mb-4">05 / PERSONALIZATION</span>
                     <h3 class="text-xl font-semibold text-primary mb-4 tracking-tight font-geist leading-tight">Material Design 3</h3>
                     <p class="text-on-surface-variant font-geist text-sm leading-relaxed">
-                        Built with expressive Material 3 tokens, featuring customized diamond pickaxe animations and dynamic system theming.
+                        Built with expressive Material 3 tokens, intuitive navigation, dynamic shapes, and smooth animations perfectly matching Android 14+.
                     </p>
                 </div>
             </div>
@@ -613,12 +607,12 @@
 
     <!-- BEGIN: Community & Vision Section -->
     <section id="community" class="w-full max-w-7xl mx-auto px-6 md:px-12 pt-8 reveal-up">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
 
             <!-- Left: Vision Text -->
-            <div class="lg:col-span-7 xl:col-span-7 pt-4">
+            <div class="lg:col-span-7 xl:col-span-8">
                 <h2 class="text-4xl md:text-[48px] font-semibold tracking-tight md:tracking-[-0.04em] text-primary font-geist leading-[0.95] mb-8">
-                    Built by the Community
+                    Built for the Community
                 </h2>
 
                 <div class="space-y-6 text-on-surface-variant font-geist text-base md:text-lg leading-relaxed mb-10 max-w-3xl">
@@ -630,42 +624,28 @@
                     </p>
                 </div>
 
-                <a href="https://github.com" target="_blank" class="inline-flex items-center justify-center gap-2 bg-primary text-[var(--dialog-bg)] px-8 py-3.5 rounded-xl text-sm font-bold hover:scale-105 hover:opacity-90 transition-all active:scale-95 shadow-lg w-full sm:w-auto">
+                <a href="https://github.com/cgens67/mcaddonsapp" target="_blank" class="inline-flex items-center justify-center gap-2 bg-primary text-[var(--dialog-bg)] px-8 py-3.5 rounded-xl text-sm font-bold hover:scale-105 hover:opacity-90 transition-all active:scale-95 shadow-lg w-full sm:w-auto">
                     <span class="material-symbols-outlined text-[20px]">call_split</span>
                     Contribute on GitHub
                 </a>
             </div>
 
-            <!-- Right: Authors -->
-            <div class="lg:col-span-5 xl:col-span-5 flex flex-col sm:flex-row lg:flex-col gap-8 justify-center lg:justify-start lg:border-l lg:border-[var(--border-color)] lg:pl-16">
-                <!-- Creator 1 -->
-                <div class="flex flex-col items-center text-center w-full relative p-6 bg-black/[0.02] dark:bg-white/[0.02] border border-[var(--border-color)] rounded-3xl">
-                    <div class="relative w-24 h-24 rounded-full mb-4 p-1 bg-gradient-to-tr from-emerald-300 to-cyan-300 dark:from-emerald-700 dark:to-cyan-900 glow-avatar overflow-hidden">
-                        <div class="w-full h-full rounded-full border-2 border-white dark:border-slate-800 bg-emerald-100 dark:bg-emerald-900 flex items-center justify-center text-3xl font-bold text-emerald-600 dark:text-emerald-300">C</div>
+            <!-- Right: Author -->
+            <div class="lg:col-span-5 xl:col-span-4 flex justify-center lg:justify-end lg:border-l lg:border-[var(--border-color)] lg:pl-16">
+                <div class="flex flex-col items-center text-center w-full max-w-sm relative">
+                    <div class="relative w-32 h-32 rounded-full mb-6 p-1 bg-gradient-to-tr from-emerald-300 to-cyan-300 dark:from-emerald-700 dark:to-cyan-900 glow-avatar overflow-hidden">
+                        <img src="https://avatars.githubusercontent.com/u/237695506?v=4" alt="cgens67" class="w-full h-full object-cover rounded-full border-2 border-white dark:border-slate-800" loading="lazy" decoding="async" />
                     </div>
-                    <h3 class="text-xl font-bold text-primary mb-1 tracking-tight font-geist">cgens67</h3>
-                    <p class="text-slate-500 text-[10px] font-semibold uppercase tracking-widest mb-3 font-geist">Lead Developer</p>
-                    <p class="text-on-surface-variant font-geist text-xs leading-relaxed mb-5">
+
+                    <h3 class="text-2xl font-bold text-primary mb-2 tracking-tight font-geist">cgens67</h3>
+                    <p class="text-slate-500 text-xs font-semibold uppercase tracking-widest mb-4 font-geist">Lead Developer</p>
+
+                    <p class="text-on-surface-variant font-geist text-sm leading-relaxed mb-8">
                         Creator and lead developer. Passionate about building beautiful, open-source Android experiences.
                     </p>
-                    <a href="https://github.com/cgens67" target="_blank" class="flex items-center justify-center gap-2 bg-black/5 dark:bg-white/10 border border-[var(--border-color)] text-primary px-6 py-2.5 rounded-xl text-xs font-bold hover:bg-black/10 dark:hover:bg-white/15 hover:scale-105 transition-all active:scale-95 shadow-sm w-full">
-                        <span class="material-symbols-outlined text-[16px]">account_circle</span>
-                        View Profile
-                    </a>
-                </div>
 
-                <!-- Creator 2 -->
-                <div class="flex flex-col items-center text-center w-full relative p-6 bg-black/[0.02] dark:bg-white/[0.02] border border-[var(--border-color)] rounded-3xl">
-                    <div class="relative w-24 h-24 rounded-full mb-4 p-1 bg-gradient-to-tr from-emerald-300 to-cyan-300 dark:from-emerald-700 dark:to-cyan-900 glow-avatar overflow-hidden">
-                        <div class="w-full h-full rounded-full border-2 border-white dark:border-slate-800 bg-cyan-100 dark:bg-cyan-900 flex items-center justify-center text-3xl font-bold text-cyan-600 dark:text-cyan-300">J</div>
-                    </div>
-                    <h3 class="text-xl font-bold text-primary mb-1 tracking-tight font-geist">Joseph Lim</h3>
-                    <p class="text-slate-500 text-[10px] font-semibold uppercase tracking-widest mb-3 font-geist">Co-Author & UI/UX</p>
-                    <p class="text-on-surface-variant font-geist text-xs leading-relaxed mb-5">
-                        Designing intuitive interfaces and crafting the expressive Material Design 3 language.
-                    </p>
-                    <a href="https://github.com" target="_blank" class="flex items-center justify-center gap-2 bg-black/5 dark:bg-white/10 border border-[var(--border-color)] text-primary px-6 py-2.5 rounded-xl text-xs font-bold hover:bg-black/10 dark:hover:bg-white/15 hover:scale-105 transition-all active:scale-95 shadow-sm w-full">
-                        <span class="material-symbols-outlined text-[16px]">account_circle</span>
+                    <a href="https://github.com/cgens67" target="_blank" class="flex items-center justify-center gap-2 bg-black/5 dark:bg-white/10 border border-[var(--border-color)] text-primary px-8 py-3.5 rounded-xl text-sm font-bold hover:bg-black/10 dark:hover:bg-white/15 hover:scale-105 transition-all active:scale-95 shadow-sm w-full">
+                        <span class="material-symbols-outlined text-[18px]">account_circle</span>
                         View Profile
                     </a>
                 </div>
@@ -686,7 +666,7 @@
                 </p>
             </div>
             <div class="md:col-span-4 flex justify-start md:justify-end w-full">
-                <a href="https://github.com" target="_blank" class="inline-flex items-center justify-center gap-2 bg-primary text-[var(--dialog-bg)] px-8 py-3.5 rounded-xl text-sm font-bold hover:opacity-90 hover:scale-105 transition-all active:scale-95 shadow-lg w-full sm:w-auto">
+                <a href="https://github.com/cgens67/mcaddonsapp" target="_blank" class="inline-flex items-center justify-center gap-2 bg-primary text-[var(--dialog-bg)] px-8 py-3.5 rounded-xl text-sm font-bold hover:opacity-90 hover:scale-105 transition-all active:scale-95 shadow-lg w-full sm:w-auto">
                     <span class="material-symbols-outlined text-[20px] text-amber-400" style="font-variation-settings: 'FILL' 1;">star</span>
                     Star on GitHub
                 </a>
@@ -706,10 +686,10 @@
             </div>
 
             <h2 class="text-4xl md:text-[48px] font-semibold tracking-tight md:tracking-[-0.04em] text-primary font-geist leading-[0.95] mb-6">
-                Ready to enhance Bedrock?
+                Ready to try MC Addons?
             </h2>
             <p class="text-on-surface-variant font-geist text-base md:text-lg max-w-xl mb-8 leading-relaxed">
-                Take control of your Minecraft mods today. Enjoy a fast, ad-free, and fully native Android open-source manager.
+                Take control of your Bedrock mods today. Enjoy a fast, ad-free, and fully native open-source addon manager.
             </p>
 
             <div class="flex flex-col items-center justify-center gap-3 w-full sm:w-auto">
@@ -827,7 +807,7 @@
                     </summary>
                     <div class="faq-content">
                         <div class="px-6 pb-6 pt-0 text-on-surface-variant font-geist text-sm md:text-base leading-relaxed">
-                            You can download the APK directly using the download buttons on this site or from our GitHub Releases page. Simply install the APK file on your Android 14+ device.
+                            You can download the APK directly using the download buttons on this site or from our GitHub Releases page. Simply install the APK file on your Android device (Android 14+).
                         </div>
                     </div>
                 </details>
@@ -842,16 +822,14 @@
             <!-- Logo & Description -->
             <div class="col-span-1 flex flex-col gap-6">
                 <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 rounded-lg shadow-sm border border-[var(--border-color)] bg-gradient-to-br from-emerald-400 to-cyan-500 flex items-center justify-center text-white">
-                        <span class="material-symbols-outlined text-[20px]">category</span>
-                    </div>
+                    <img src="https://raw.githubusercontent.com/cgens67/jlmcpackaddons/main/assets/svg/app.svg" alt="MC Addons Logo" class="w-8 h-8 rounded-lg object-cover shadow-sm border border-[var(--border-color)]" />
                     <span class="text-lg font-bold tracking-tight text-primary">MC Addons</span>
                 </div>
                 <p class="text-on-surface-variant font-body text-sm leading-relaxed max-w-xs pr-4">
                     Crafting a clean, modern, and open-source Bedrock Addon experience for Android.
                 </p>
                 <div class="flex gap-4 mt-2">
-                    <a href="https://github.com" target="_blank" class="w-10 h-10 rounded-xl border border-[var(--border-color)] bg-black/5 dark:bg-white/5 flex items-center justify-center text-primary hover:bg-black/10 transition-colors shadow-sm">
+                    <a href="https://github.com/cgens67/mcaddonsapp" target="_blank" class="w-10 h-10 rounded-xl border border-[var(--border-color)] bg-black/5 dark:bg-white/5 flex items-center justify-center text-primary hover:bg-black/10 transition-colors shadow-sm">
                         <span class="material-symbols-outlined text-[20px]">code</span>
                     </a>
                 </div>
@@ -871,9 +849,9 @@
             <div>
                 <h4 class="font-bold mb-6 text-base text-primary tracking-tight">Community</h4>
                 <ul class="space-y-4 text-sm text-on-surface-variant font-body">
-                    <li><a class="hover:text-primary transition-colors" href="https://github.com" target="_blank">GitHub Repository</a></li>
-                    <li><a class="hover:text-primary transition-colors" href="https://github.com" target="_blank">Bug Reports</a></li>
-                    <li><a class="hover:text-primary transition-colors" href="https://github.com" target="_blank">Releases</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="https://github.com/cgens67/mcaddonsapp" target="_blank">GitHub Repository</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="https://github.com/cgens67/mcaddonsapp/issues" target="_blank">Bug Reports</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="https://github.com/cgens67/mcaddonsapp/releases" target="_blank">Releases</a></li>
                 </ul>
             </div>
 
@@ -897,7 +875,6 @@
             <p class="flex items-center gap-1 flex-wrap justify-center md:justify-end">
                 <span>Created by</span>
                 <a href="https://github.com/cgens67" target="_blank" class="text-primary hover:underline transition-colors font-semibold">cgens67</a>
-                <span>and Joseph Lim</span>
             </p>
         </div>
     </footer>
@@ -924,7 +901,7 @@
                     <span id="dl-latest-label" class="text-xs text-slate-500 truncate max-w-full">Stable Build</span>
                 </a>
 
-                <!-- Choice 2: Beta (Pre-release) -->
+                <!-- Choice 2: Beta (Pre-release app-release.apk) -->
                 <a id="dl-beta" href="#" target="_blank" class="helium-dialog-btn select-none group">
                     <span class="material-symbols-outlined text-3xl group-hover:scale-110 transition-transform text-amber-500">science</span>
                     <span class="text-base font-bold">Beta</span>
@@ -933,7 +910,7 @@
             </div>
 
             <!-- All Releases Link -->
-            <a href="https://github.com" target="_blank" class="helium-dialog-btn select-none group !flex-row !items-center !justify-start !text-left gap-3 w-full py-3 mb-2">
+            <a href="https://github.com/cgens67/mcaddonsapp/releases" target="_blank" class="helium-dialog-btn select-none group !flex-row !items-center !justify-start !text-left gap-3 w-full py-3 mb-2">
                 <span class="material-symbols-outlined text-2xl text-slate-400 shrink-0">history</span>
                 <div class="text-left flex-1 min-w-0">
                     <span class="text-sm font-bold block leading-none mb-1 text-primary">All GitHub Releases</span>
@@ -1195,32 +1172,84 @@
                 }
             }
 
-            // --- 8. Fallback Stats (Since no repo might exist yet) ---
-            // Trigger animation immediately with fallback stats
-            setTimeout(() => {
-                animateValue('github-stars-hero', 1250, 2000, 'GitHub stars');
-                animateValue('total-downloads-hero', 45000, 2500, 'total downloads');
-            }, 300);
+            // --- 8. GitHub API Stats & Release Fetcher (Targeting cgens67/mcaddonsapp) ---
+            fetch('https://api.github.com/repos/cgens67/mcaddonsapp')
+                .then(res => res.json())
+                .then(data => {
+                    if (data.stargazers_count !== undefined) {
+                        animateValue('github-stars-hero', data.stargazers_count, 2000, 'GitHub stars');
+                    } else {
+                        animateValue('github-stars-hero', 1, 2000, 'GitHub stars');
+                    }
+                }).catch(() => { animateValue('github-stars-hero', 1, 2000, 'GitHub stars'); });
 
+            fetch('https://api.github.com/repos/cgens67/mcaddonsapp/releases')
+                .then(res => res.json())
+                .then(releases => {
+                    if (Array.isArray(releases) && releases.length > 0) {
+                        // Total downloads
+                        let totalDownloads = 0;
+                        releases.forEach(rel => {
+                            if (rel.assets) rel.assets.forEach(a => totalDownloads += a.download_count);
+                        });
+                        animateValue('total-downloads-hero', totalDownloads > 0 ? totalDownloads : 15, 2500, 'total downloads');
+
+                        // 1. Latest Stable release
+                        const latestStable = releases.find(r => !r.prerelease) || releases[0];
+                        
+                        // 2. Beta Pre-release (finds prerelease or tag with 'b'/'beta')
+                        const betaRelease = releases.find(r => r.prerelease || r.tag_name.toLowerCase().startsWith('b') || r.tag_name.toLowerCase().includes('beta')) || releases[0];
+
+                        function resolveApk(rel) {
+                            if (!rel || !rel.assets || rel.assets.length === 0) {
+                                return rel?.html_url || 'https://github.com/cgens67/mcaddonsapp/releases';
+                            }
+                            // Priority: app-release.apk
+                            const universal = rel.assets.find(a => a.name === 'app-release.apk');
+                            if (universal) return universal.browser_download_url;
+
+                            const anyApk = rel.assets.find(a => a.name.endsWith('.apk'));
+                            return anyApk ? anyApk.browser_download_url : rel.html_url;
+                        }
+
+                        // Update Latest Link
+                        const latestUrl = resolveApk(latestStable);
+                        document.getElementById('dl-latest').href = latestUrl;
+                        document.getElementById('dl-latest-label').textContent = latestStable.tag_name || 'Stable Build';
+
+                        // Update Beta Link (fetching pre-release app-release.apk)
+                        const betaUrl = resolveApk(betaRelease);
+                        document.getElementById('dl-beta').href = betaUrl;
+                        document.getElementById('dl-beta-label').textContent = betaRelease.tag_name || 'Beta Pre-release';
+                        document.getElementById('dl-btn-beta-section').href = betaUrl;
+                    } else {
+                        animateValue('total-downloads-hero', 15, 2500, 'total downloads');
+                    }
+                }).catch(() => {
+                    document.getElementById('dl-latest').href = 'https://github.com/cgens67/mcaddonsapp/releases/latest';
+                    document.getElementById('dl-beta').href = 'https://github.com/cgens67/mcaddonsapp/releases';
+                    document.getElementById('dl-btn-beta-section').href = 'https://github.com/cgens67/mcaddonsapp/releases';
+                    animateValue('total-downloads-hero', 15, 2500, 'total downloads');
+                });
 
             // --- 9. Carousel Logic ---
             const slides = [
                 {
-                    title: "One-Tap Install",
-                    desc: "Automatically packages and launches `.mcaddon`, `.mcpack`, and `.mcworld` files straight into Minecraft. No file managers needed.",
-                    img: "https://images.unsplash.com/photo-1607513364986-ce0187889e47?auto=format&fit=crop&q=80&w=600&h=1200",
+                    title: "Discover Addons",
+                    desc: "Browse thousands of Bedrock addons seamlessly. Everything is neatly categorized and instantly accessible right from your device.",
+                    img: "https://raw.githubusercontent.com/cgens67/jlmcpackaddons/main/assets/images/mainlistscreen.jpg",
                     tag: "CORE FEATURE"
                 },
                 {
-                    title: "Seamless Discovery",
-                    desc: "Access an entire community of Bedrock creators seamlessly. Everything is categorized by addons, textures, and worlds.",
-                    img: "https://images.unsplash.com/photo-1607513364945-e51c897f2674?auto=format&fit=crop&q=80&w=600&h=1200",
-                    tag: "ORGANIZATION"
+                    title: "Customizable UI",
+                    desc: "Tailor the interface with customizable themes, agile layouts, and Material Design 3 component styling to match your preferences.",
+                    img: "https://raw.githubusercontent.com/cgens67/jlmcpackaddons/main/assets/images/appearancesettings.jpg",
+                    tag: "PERSONALIZATION"
                 },
                 {
-                    title: "Multi-language",
-                    desc: "Built-in localization support for 6+ languages. Content auto-translates to your device's native locale seamlessly.",
-                    img: "https://images.unsplash.com/photo-1596726149156-f7c1305417df?auto=format&fit=crop&q=80&w=600&h=1200",
+                    title: "Multi-language Support",
+                    desc: "Built-in localization support. The app adapts directly to your device's locale seamlessly so you can read everything natively.",
+                    img: "https://raw.githubusercontent.com/cgens67/jlmcpackaddons/main/assets/images/languageselector.jpg",
                     tag: "GLOBAL"
                 }
             ];
@@ -1302,64 +1331,42 @@
 
             updateSlide();
 
-            // --- 10. Dynamic Mockups ---
+            // --- 10. Dynamic Mockups (Using actual repository images) ---
             const dynamicMockups = document.getElementById('dynamic-mockups');
             if (dynamicMockups) {
                 const mockupsData = [
-                    { 
-                        title: 'Modern UI Addon', author: 'Team UI',
-                        src: 'https://images.unsplash.com/photo-1607513364986-ce0187889e47?auto=format&fit=crop&q=80&w=600&h=1200', 
-                        py: 40, delay: 50 
-                    },
-                    { 
-                        title: 'Faithful 32x', author: 'Team Faithful',
-                        src: 'https://images.unsplash.com/photo-1607513364945-e51c897f2674?auto=format&fit=crop&q=80&w=600&h=1200', 
-                        py: 0, delay: 100 
-                    },
-                    { 
-                        title: 'Skyblock Mega', author: 'Map Makers',
-                        src: 'https://images.unsplash.com/photo-1596726149156-f7c1305417df?auto=format&fit=crop&q=80&w=600&h=1200', 
-                        py: 20, delay: 150 
-                    },
-                    { 
-                        title: 'OneBlock Survival', author: 'Joseph Lim',
-                        src: 'https://images.unsplash.com/photo-1605901309584-818e25960b8f?auto=format&fit=crop&q=80&w=600&h=1200', 
-                        py: 55, delay: 200 
-                    }
+                    { src: 'https://raw.githubusercontent.com/cgens67/jlmcpackaddons/main/assets/images/mainlistscreen.jpg', py: 40, delay: 50 },
+                    { src: 'https://raw.githubusercontent.com/cgens67/jlmcpackaddons/main/assets/images/languageselector.jpg', py: 0, delay: 100 },
+                    { src: 'https://raw.githubusercontent.com/cgens67/jlmcpackaddons/main/assets/images/appearancesettings.jpg', py: 20, delay: 150 },
+                    { src: 'https://raw.githubusercontent.com/cgens67/jlmcpackaddons/main/assets/images/settingsscreen1.jpg', py: 55, delay: 200 }
                 ];
                 
                 mockupsData.forEach((mockup, index) => {
+                    // Wrapper for reveal-up animation (separating the translation so it doesn't fight with parallax/hover)
                     const wrapper = document.createElement('div');
+                    // Add pb-12 pt-6 so the scale + hover translateY doesn't get clipped by the flex container bounds
                     wrapper.className = 'snap-center shrink-0 w-[230px] md:w-[270px] reveal-up pb-12 pt-6';
                     wrapper.style.transitionDelay = `${mockup.delay}ms`;
 
+                    // Inner wrapper for hover/parallax transformation
                     const item = document.createElement('div');
                     item.className = 'mockup-item relative w-full h-full';
                     item.style.setProperty('--py', `${mockup.py}px`);
                     
                     const frame = document.createElement('div');
-                    frame.className = 'relative w-full aspect-[9/19] rounded-[2.5rem] border-[6px] border-slate-900 dark:border-white/20 bg-black overflow-hidden phone-frame transition-all duration-300 group';
+                    frame.className = 'relative w-full aspect-[9/19] rounded-[2.5rem] border-[6px] border-slate-900 dark:border-white/20 bg-black overflow-hidden phone-frame transition-all duration-300';
                     
                     const img = document.createElement('img');
                     img.alt = `Screenshot ${index + 1}`;
-                    img.className = 'w-full h-full object-cover transition-transform duration-700 group-hover:scale-105';
+                    img.className = 'w-full h-full object-cover';
                     img.src = mockup.src;
 
-                    // Reconstruct app overlay to look like a functional app preview
-                    const overlay = document.createElement('div');
-                    overlay.className = 'absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-5';
-                    overlay.innerHTML = `
-                        <h4 class="text-white font-bold text-lg leading-tight mb-1">${mockup.title}</h4>
-                        <p class="text-slate-300 text-xs mb-4">by ${mockup.author}</p>
-                        <button class="w-full bg-emerald-500 text-white font-semibold text-sm py-3 rounded-xl shadow-md">Install</button>
-                    `;
-
                     frame.appendChild(img);
-                    frame.appendChild(overlay);
                     item.appendChild(frame);
                     wrapper.appendChild(item);
                     dynamicMockups.appendChild(wrapper);
                     
+                    // Observe for reveal animation
                     observer.observe(wrapper);
                 });
 
@@ -1386,6 +1393,7 @@
                     });
                 }
             }
+
         });
     </script>
 </body>
